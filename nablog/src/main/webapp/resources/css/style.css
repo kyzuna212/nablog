@@ -7,10 +7,79 @@
 #header h1 { padding-left: 24px; padding-right: 24px; padding: 23px 0; font-family: 'Nanum Myeongjo'; font-weight: 800; font-size: 1.75em; line-height: 32px; letter-spacing: -0.2px; color: #333;}
 #header h1 a { display: inline-block; height: 32px; text-decoration: none; color: #333; vertical-align: top;}
 #header .util { right: 24px; position: absolute; top: 24px;}
-#header .util .search { position: relative; float: left; overflow: hidden; width: 32px; background-color: #fff; box-sizing: border-box; -webkit-transition: width 0.5s;}
-#header .util .profile { position: relative; float: left; margin-left: 14px;}
+#header .util .search { /* position: relative; */ float: left; overflow: hidden; width: 32px; background-color: #fff; box-sizing: border-box; -webkit-transition: width 0.5s;}
+#header .util .profile { /* position: relative; */ float: left; margin-left: 14px;}
 #header .util .menu { display: none;}
 #gnb { height: 66px; overflow-x: auto; overflow-y: hidden;}
+#gnb ul { margin-left: -6px; display: inline-block; vertical-align: top;}
+#gnb ul li {float: left; padding: 0 26px;}
+#gnb ul li a { position: relative; display: block; text-decoration: none; padding: 22px 4px 24px; color: #777;}
 
-/* 공통 버튼 디자인  */
+/*푸터 디자인*/
+#footer { padding-left: 24px; padding-right: 24px; padding: 38px 0 28px; border-top: 1px solid #eee;}
+#footer .inner { position: relative; max-width: 1080px; margin: 0 auto;} /*  */
+#footer .page-top { position: absolute; top: 0; right: 0; width: 30px; height: 30px; border: 1px solid #eee; border-radius: 50%; background: #fff url(./images/ico_package.png) no-repeat -100px -200px; text-indent: -999em;}
+#footer p { margin-bottom: 10px;  font-size: 0.875em; color: #777;}
+
+/*바디 디자인 <<임시*/
+body {   width : 100%; height: 100%; margin: 0; padding: 0; 
+		font-size: 100%; font-weight: 400;
+    font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif; line-height: 1.25; color: #555;} /* width: %; */
+#mainbody{}
+#container { position: relative;}
+#container .content-wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px;}
+#tt-body-index #content { padding-bottom: 43px;}
+.layout-aside-left #content { float: right;}
+#content {  width: 68.518518518518519%; padding: 72px 0 60px; box-sizing: border-box;}
+.cover-thumbnail-4 { position: relative; margin-bottom: 17px;}
+.cover-thumbnail-4 h2 { margin-bottom: 19px; font-weight: 500; font-size: 1em; color: #555;}
+.cover-thumbnail-4 ul { position: relative; display: inline-block; width: 103.378378378378378%; margin-left: -3.378378378378378%; vertical-align: top;}
+.cover-thumbnail-4 ul li { float: left; width: 33.333333333333333%; min-height: 283px; padding-left: 3.26797385620915%; margin: 0 0 55px; box-sizing: border-box;}
+.cover-thumbnail-4 ul li a { display: block; text-decoration: none;}
+.cover-thumbnail-4 ul li figure { display: block; width: 100%; height: 0; margin-bottom: 5px; padding-bottom: 60.869565217391304%; background-color: #f8f8f8;}
+.cover-thumbnail-4 ul li figure img { width: 100%; height: auto;}
+.cover-thumbnail-4 ul li .title { display: block; overflow: hidden; max-width: 95%; margin-bottom: 4px; padding-top: 9px; text-overflow: ellipsis; white-space: nowrap; line-height: 1.4;}
+.cover-thumbnail-4 ul li .excerpt { overflow: hidden; max-width: 95%; margin-bottom: 15px; text-overflow: ellipsis; font-size: 16px; line-height: 1.5rem; color: #999; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;}
+.cover-thumbnail-4 ul li .meta { display: block; font-size: 0.75em; color: #999;}
+.cover-thumbnail-2 { position: relative; overflow: hidden; width: 100%; margin-bottom: 77px;}
+.cover-thumbnail-2 h2 { margin-bottom: 28px; padding-bottom: 19px; border-bottom: 1px solid #eee; font-weight: 500; font-size: 1em; color: #555;}
+.cover-thumbnail-2 ul li { overflow: hidden; margin-top: 28px;}
+.cover-thumbnail-2 ul li a { display: block; text-decoration: none;}
+.cover-thumbnail-2 ul li figure { float: right; width: 128px; margin-left: 57px;}
+.cover-thumbnail-2 ul li figure img { width: 100%; height: auto; border: 1px solid #f1f1f1; box-sizing: border-box;}
+.cover-thumbnail-2 ul li .title { display: block; overflow: hidden; max-width: 95%; margin-bottom: 10px; padding-top: 7px; text-overflow: ellipsis; white-space: nowrap; font-size: 1.25em; line-height: 1.4;}
+.cover-thumbnail-2 ul li .excerpt { overflow: hidden; max-width: 95%; margin-bottom: 20px; text-overflow: ellipsis; font-size: 16px; line-height: 1.5rem; color: #999; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;}
+.cover-thumbnail-2 ul li .meta { display: block; font-size: 0.75em; color: #999;}
+.cover-thumbnail-3 { position: relative; margin-bottom: 77px;}
+.cover-thumbnail-3 h2 { margin-bottom: 19px; font-weight: 500; font-size: 1em; color: #555;}
+.cover-thumbnail-3 ul { position: relative; display: inline-block; margin-left: -3.378378378378378%; margin-bottom: -25px; vertical-align: top;}
+.cover-thumbnail-3 ul li { float: left; margin-bottom: 22px; box-sizing: border-box;}
+.cover-thumbnail-3 ul li a { display: block; text-decoration: none;}
+.cover-thumbnail-3 ul li figure { display: block; width: 100%; height: 0; margin-bottom: 11px; padding-bottom: 129.6875%; background-color: #f8f8f8;}
+.cover-thumbnail-3 ul li figure img { width: 100%; height: auto; border: 1px solid #f1f1f1; box-sizing: border-box;}
+.cover-thumbnail-3 ul li .title { display: block; overflow: hidden; width: 95%; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8125em; line-height: 1.4;}
+.layout-aside-left #aside { float: left; margin-left: 0; padding: 80px 0;}
+#aside { width: 21.296296296296296%; box-sizing: border-box;}
+.sidebar .category { margin-bottom: 36px;}
+.sidebar .category ul li { padding: 0; font-size: 0.875em; font-weight: 600;}
+.sidebar ul li { line-height: 1.25rem; color: #777;}
+.sidebar .category ul li a { color: #555;}
+.sidebar .category ul li ul { padding-top: 8px;}
+.sidebar .category ul li ul li { padding: 6px 0 7px; font-weight: 400; font-size: 1em;}
+.sidebar .category ul li ul li ul { overflow: hidden; margin-bottom: -4px; padding-top: 6px;}
+.sidebar .category ul li ul li ul li { position: relative; padding: 3px 0 3px 9px;font-size: 0.8125rem;}
+.sidebar .sidebar-2 { margin-top: 38px;  padding-top: 46px; border-top: 1px solid #eee;}
+
+/*확인*/
+
+
+/* 공통  디자인  */
 button { overflow: visible; margin: 0; padding: 0; border: 0; background: transparent;}
+ul li { list-style: none;}
+a, a:link { text-decoration: none; color: #555;}
+p { display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;}
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, figure { margin: 0; padding: 0; display: block;}
+ul { display: block; list-style-type: disc; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; padding-inline-start: 40px;}
+ul ul { list-style-type: circle; margin-block-start: 0px; margin-block-end: 0px;}
+ul ul ul { list-style-type: square;}   
+element.style { left: 0px; width: 543px;}

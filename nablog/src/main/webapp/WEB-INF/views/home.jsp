@@ -11,12 +11,18 @@
 	<title>Main Page</title>
 	<!-- 디자인  -->
 	<c:import url="/WEB-INF/views/common/meta.jsp" />
-	
+	<!-- header -->
+	<c:import url="/WEB-INF/views/common/header.jsp" />
 </head>
 <body>
-	<!-- 헤더 -->
-	<c:import url="/WEB-INF/views/common/header.jsp" />
+	
+	
+	<!-- contents -->
+	<div id="mainbody">
+	<c:import url="/WEB-INF/views/common/body.jsp"/>
+	</div>
 
-
+	<!-- footer -->
+	<c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
  </body>
 </html>
