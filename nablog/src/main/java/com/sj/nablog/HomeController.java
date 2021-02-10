@@ -1,7 +1,5 @@
 package com.sj.nablog;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
