@@ -1,31 +1,27 @@
 @charset "UTF-8";
 
 /* 헤더 디자인 */
-#header { border-bottom: 1px solid #eee;}
-#header .inner { position: relative; max-width: 1080px; margin: 0 auto;}
-#header h1{ }
-#header h1 { padding-left: 24px; padding-right: 24px; padding: 23px 0; font-family: 'Nanum Myeongjo'; font-weight: 800; font-size: 1.75em; line-height: 32px; letter-spacing: -0.2px; color: #333;}
-#header h1 a { display: inline-block; height: 32px; text-decoration: none; color: #333; vertical-align: top;}
-#header .util { right: 24px; position: absolute; top: 24px;}
-#header .util .search { /* position: relative; */ float: left; overflow: hidden; width: 32px; background-color: #fff; box-sizing: border-box; -webkit-transition: width 0.5s;}
-#header .util .profile { /* position: relative; */ float: left; margin-left: 14px;}
-#header .util .menu { display: none;}
-#gnb { height: 66px; overflow-x: auto; overflow-y: hidden;}
-#gnb ul { margin-left: -6px; display: inline-block; vertical-align: top;}
-#gnb ul li {float: left; padding: 0 26px;}
-#gnb ul li a { position: relative; display: block; text-decoration: none; padding: 22px 4px 24px; color: #777;}
+#header { border-bottom: 1px solid #eee;  }
+#header h1 {  text-align: center; padding: 56px 0; /* font-family: 'GmarketSansLight'; font-weight: 800; font-size: 2.25em; */ /* line-height: 32px; */ /* letter-spacing: -0.2px; color: #333; */} 
+#header h1 a { display: inline-block; height: 42px; text-decoration: none; color: #333; vertical-align: top;} 
+#header h1 a img {height:100px ; margin-top:-25px;}
+#header .util .menu {  left: 24px;  position: relative;   top:-56px;   float: left;  margin-left: 24px;  display: inline-block; }
+#header .util .search {  left: 24px;  position: relative;  top: -56px;  float: left;  overflow: hidden; margin-left: 24px;  background-color: #fff; box-sizing: border-box; -webkit-transition: width 0.5s; }
+#header .util .right_menubar {font-family: 'GmarketSansLight'; font-weight: 800; font-size: 1.35em; letter-spacing: -0.2px; color: #333;}
+/* #header .util .right_menubar .contact{  position: relative;  top:-36px;  float: right;  margin-right: 24px; } */
+#header .util .right_menubar .about{   position: relative;  top: -36px;  float: right;  overflow: hidden; margin-right: 24px;  background-color: #fff; box-sizing: border-box; -webkit-transition: width 0.5s;}
 
 /*푸터 디자인*/
-#footer { padding-left: 24px; padding-right: 24px; padding: 38px 0 28px; border-top: 1px solid #eee;}
-#footer .inner { position: relative; max-width: 1080px; margin: 0 auto;} /*  */
-#footer .page-top { position: absolute; top: 0; right: 0; width: 30px; height: 30px; border: 1px solid #eee; border-radius: 50%; background: #fff url(./images/ico_package.png) no-repeat -100px -200px; text-indent: -999em;}
-#footer p { margin-bottom: 10px;  font-size: 0.875em; color: #777;}
+#footer { padding-left: 24px; padding-right: 24px; padding: 38px 0 28px;  border-top: 1px solid #eee; max-width: 1800px;   margin: 0 auto;}
+#footer .inner { position: relative;  max-width: 1080px;  margin: 0 auto;  } 
+#footer .page-top { position: absolute; top: -10px; right: 0; width: 30px; /* height: 30px; border: 1px solid #eee; border-radius: 50%; background: #fff url(./images/ico_package.png) no-repeat -100px -200px; text-indent: -999em; */}
+#footer p { /* float: left; margin-bottom: 20px; */ font-family: 'GmarketSansLight'; font-weight: 800; font-size: 1.35em; color: #333;}
 
 /*바디 디자인 <<임시*/
-body {   width : 100%; height: 100%; margin: 0; padding: 0; 
+/* body {   width : 100%; height: 100%; margin: 0; padding: 0; 
 		font-size: 100%; font-weight: 400;
-    font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif; line-height: 1.25; color: #555;} /* width: %; */
-#mainbody{}
+    font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif; line-height: 1.25; color: #555;} width: %;
+#mainbody{margin-top:500px;}
 #container { position: relative;}
 #container .content-wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px;}
 #tt-body-index #content { padding-bottom: 43px;}
@@ -68,10 +64,10 @@ body {   width : 100%; height: 100%; margin: 0; padding: 0;
 .sidebar .category ul li ul li { padding: 6px 0 7px; font-weight: 400; font-size: 1em;}
 .sidebar .category ul li ul li ul { overflow: hidden; margin-bottom: -4px; padding-top: 6px;}
 .sidebar .category ul li ul li ul li { position: relative; padding: 3px 0 3px 9px;font-size: 0.8125rem;}
-.sidebar .sidebar-2 { margin-top: 38px;  padding-top: 46px; border-top: 1px solid #eee;}
+.sidebar .sidebar-2 { margin-top: 38px;  padding-top: 46px; border-top: 1px solid #eee;} */
 
-/*확인*/
-
+/*전체 배경*/
+#all_wrap { height:1300px; max-width:1200px; margin: 0 auto; background-color: white; margin-top:20px; margin-bottom:20px;width: calc(1700px/2);}
 
 /* 공통  디자인  */
 button { overflow: visible; margin: 0; padding: 0; border: 0; background: transparent;}

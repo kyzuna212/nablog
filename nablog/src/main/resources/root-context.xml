@@ -26,7 +26,7 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<context:component-scan base-package="com.sj.nablog"></context:component-scan>
+	<context:component-scan base-package="com.sj.nablog"/>
 	
 	<mybatis-spring:scan base-package="com.sj.nablog.mapper" />
 	
