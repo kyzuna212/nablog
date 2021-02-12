@@ -6,10 +6,17 @@
 #header h1 a { display: inline-block; height: 42px; text-decoration: none; color: #333; vertical-align: top;} 
 #header h1 a img {height:100px ; margin-top:-25px;}
 #header .util .menu {  left: 24px;  position: relative;   top:-56px;   float: left;  margin-left: 24px;  display: inline-block; }
-#header .util .search {  left: 24px;  position: relative;  top: -56px;  float: left;  overflow: hidden; margin-left: 24px;  background-color: #fff; box-sizing: border-box; -webkit-transition: width 0.5s; }
+#header .util .search {  left: 94px;  position: absolute ;   top: 108px;  float: left;  overflow: hidden;  margin-left: 24px;  background-color: #fff; /* box-sizing: border-box; */ -webkit-transition: width 0.5s;   }
+#header .util .search .input_text{  font-family: 'GmarketSansLight'; font-weight: 800; font-size: 0.85em; text-align:center; height: 35px; float: left;  overflow: hidden; margin-right:2px; margin-top: 6px;  background-color: #fff; box-sizing: border-box;  }
+#header .util .search button{ margin-top:1px;  border:0;  outline:none;}
 #header .util .right_menubar {font-family: 'GmarketSansLight'; font-weight: 800; font-size: 1.35em; letter-spacing: -0.2px; color: #333;}
 /* #header .util .right_menubar .contact{  position: relative;  top:-36px;  float: right;  margin-right: 24px; } */
 #header .util .right_menubar .about{   position: relative;  top: -36px;  float: right;  overflow: hidden; margin-right: 24px;  background-color: #fff; box-sizing: border-box; -webkit-transition: width 0.5s;}
+#header .util .menu a{ cursor:pointer;}
+#header .util .menu .hide{ width:250px; display:none;  margin-top: 20px; border-color: #e8e8e8; border-top: 5px solid #e0e0e0; border-bottom: 5px solid #e0e0e0;}
+#header .util .menu .hide li{ padding: 15px 0; font-family: 'GmarketSansLight'; font-weight: 800; font-size: 1.35em; letter-spacing: -0.2px; color: #333; border-bottom:1px solid #e0e0e0;} 
+#header .util .menu .hide li img{width:20px; margin-left: 4px;}
+#header .util .menu .hide .sub_hide li{ text-align: center; padding: 15px 0; font-family: 'GmarketSansLight'; /* font-weight: 800; */ font-size: 0.85em; letter-spacing: -0.2px; color: #333333a1; border-top:1px solid #e0e0e0;}
 
 /*푸터 디자인*/
 #footer { padding-left: 24px; padding-right: 24px; padding: 38px 0 28px;  border-top: 1px solid #eee; max-width: 1800px;   margin: 0 auto;}
