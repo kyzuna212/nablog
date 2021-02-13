@@ -9,10 +9,10 @@
 <body>
 <footer id="footer">
 		<div class="inner">
-			
-			<a href="#" class="page-top"><img alt="top" src="resources/images/icons8-up.png"></a>
-<!-- 			<p class="meta"></p> -->
 			<p class="copyright">©나츠키</p>
+			<p class="visitor">today's visitor : 0</p>
+			<a href="#header" class="page-top"><img alt="top" src="resources/images/icons8-up.png"></a>
+
 		</div>
 	</footer>
 </body>

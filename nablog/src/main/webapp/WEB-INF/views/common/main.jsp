@@ -16,7 +16,7 @@
 <c:import url="/WEB-INF/views/common/header.jsp" />
 </head>
 <body>
-	<div id="all_wrap">
+	<div id="all_wrap_main">
 		
 		<!-- 콘텐츠 -->
 		<div id="mainbody">

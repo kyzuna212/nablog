@@ -31,7 +31,7 @@ public class HomeController {
 	@RequestMapping(value="/main.do",method=RequestMethod.GET )
 	public String main (Model model) {
 		
-		
+		model.addAttribute("main", "main");
 		return "common/main";
 	}
 	

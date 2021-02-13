@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-/* 헤더 디자인 */
+/* 헤더 */
 #header { border-bottom: 1px solid #eee;  }
 #header h1 {  text-align: center; padding: 56px 0; /* font-family: 'GmarketSansLight'; font-weight: 800; font-size: 2.25em; */ /* line-height: 32px; */ /* letter-spacing: -0.2px; color: #333; */} 
 #header h1 a { display: inline-block; height: 42px; text-decoration: none; color: #333; vertical-align: top;} 
@@ -8,81 +8,73 @@
 #header .util .menu {  left: 24px;  position: relative;   top:-56px;   float: left;  margin-left: 24px;  display: inline-block; }
 #header .util .search {  left: 94px;  position: absolute ;   top: 108px;  float: left;  overflow: hidden;  margin-left: 24px;  background-color: #fff; /* box-sizing: border-box; */ -webkit-transition: width 0.5s;   }
 #header .util .search .input_text{  font-family: 'GmarketSansLight'; font-weight: 800; font-size: 0.85em; text-align:center; height: 35px; float: left;  overflow: hidden; margin-right:2px; margin-top: 6px;  background-color: #fff; box-sizing: border-box;  }
-#header .util .search button{ margin-top:1px;  border:0;  outline:none;}
+#header .util .search button{ margin-top:1px;  border:0;  outline:none;  cursor:pointer;}
 #header .util .right_menubar {font-family: 'GmarketSansLight'; font-weight: 800; font-size: 1.35em; letter-spacing: -0.2px; color: #333;}
 /* #header .util .right_menubar .contact{  position: relative;  top:-36px;  float: right;  margin-right: 24px; } */
 #header .util .right_menubar .about{   position: relative;  top: -36px;  float: right;  overflow: hidden; margin-right: 24px;  background-color: #fff; box-sizing: border-box; -webkit-transition: width 0.5s;}
 #header .util .menu a{ cursor:pointer;}
 #header .util .menu .hide{ width:250px; display:none;  margin-top: 20px; border-color: #e8e8e8; border-top: 5px solid #e0e0e0; border-bottom: 5px solid #e0e0e0;}
 #header .util .menu .hide li{ padding: 15px 0; font-family: 'GmarketSansLight'; font-weight: 800; font-size: 1.35em; letter-spacing: -0.2px; color: #333; border-bottom:1px solid #e0e0e0;} 
-#header .util .menu .hide li img{width:20px; margin-left: 4px;}
+#header .util .menu .hide li a{cursor:pointer;}
+#header .util .menu .hide li img{width:20px; margin-left: 4px; cursor:pointer;}
 #header .util .menu .hide .sub_hide li{ text-align: center; padding: 15px 0; font-family: 'GmarketSansLight'; /* font-weight: 800; */ font-size: 0.85em; letter-spacing: -0.2px; color: #333333a1; border-top:1px solid #e0e0e0;}
 
-/*푸터 디자인*/
+/*푸터 */
 #footer { padding-left: 24px; padding-right: 24px; padding: 38px 0 28px;  border-top: 1px solid #eee; max-width: 1800px;   margin: 0 auto;}
 #footer .inner { position: relative;  max-width: 1080px;  margin: 0 auto;  } 
-#footer .page-top { position: absolute; top: -10px; right: 0; width: 30px; /* height: 30px; border: 1px solid #eee; border-radius: 50%; background: #fff url(./images/ico_package.png) no-repeat -100px -200px; text-indent: -999em; */}
-#footer p { /* float: left; margin-bottom: 20px; */ font-family: 'GmarketSansLight'; font-weight: 800; font-size: 1.35em; color: #333;}
+#footer .page-top { position: absolute; top: -20px; right: 0; width: 30px; /* height: 30px; border: 1px solid #eee; border-radius: 50%; background: #fff url(./images/ico_package.png) no-repeat -100px -200px; text-indent: -999em; */}
+#footer .visitor { /* float: left; margin-bottom: 20px; */position: absolute; top: -10px; right: 400px; width: 200px;  font-family: 'GmarketSansLight';  font-weight: 400;  font-size: 1.05em; color: ##333; /* display: inline-block; */}
+#footer .copyright{ position: absolute; top: -10px; font-family: 'GmarketSansLight'; font-weight: 800; font-size: 1.35em; color: #333;}
 
-/*바디 디자인 <<임시*/
-/* body {   width : 100%; height: 100%; margin: 0; padding: 0; 
-		font-size: 100%; font-weight: 400;
-    font-family: 'AppleSDGothicNeo', 'Noto Sans KR', sans-serif; line-height: 1.25; color: #555;} width: %;
-#mainbody{margin-top:500px;}
-#container { position: relative;}
-#container .content-wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px;}
-#tt-body-index #content { padding-bottom: 43px;}
-.layout-aside-left #content { float: right;}
-#content {  width: 68.518518518518519%; padding: 72px 0 60px; box-sizing: border-box;}
-.cover-thumbnail-4 { position: relative; margin-bottom: 17px;}
-.cover-thumbnail-4 h2 { margin-bottom: 19px; font-weight: 500; font-size: 1em; color: #555;}
-.cover-thumbnail-4 ul { position: relative; display: inline-block; width: 103.378378378378378%; margin-left: -3.378378378378378%; vertical-align: top;}
-.cover-thumbnail-4 ul li { float: left; width: 33.333333333333333%; min-height: 283px; padding-left: 3.26797385620915%; margin: 0 0 55px; box-sizing: border-box;}
-.cover-thumbnail-4 ul li a { display: block; text-decoration: none;}
-.cover-thumbnail-4 ul li figure { display: block; width: 100%; height: 0; margin-bottom: 5px; padding-bottom: 60.869565217391304%; background-color: #f8f8f8;}
-.cover-thumbnail-4 ul li figure img { width: 100%; height: auto;}
-.cover-thumbnail-4 ul li .title { display: block; overflow: hidden; max-width: 95%; margin-bottom: 4px; padding-top: 9px; text-overflow: ellipsis; white-space: nowrap; line-height: 1.4;}
-.cover-thumbnail-4 ul li .excerpt { overflow: hidden; max-width: 95%; margin-bottom: 15px; text-overflow: ellipsis; font-size: 16px; line-height: 1.5rem; color: #999; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;}
-.cover-thumbnail-4 ul li .meta { display: block; font-size: 0.75em; color: #999;}
-.cover-thumbnail-2 { position: relative; overflow: hidden; width: 100%; margin-bottom: 77px;}
-.cover-thumbnail-2 h2 { margin-bottom: 28px; padding-bottom: 19px; border-bottom: 1px solid #eee; font-weight: 500; font-size: 1em; color: #555;}
-.cover-thumbnail-2 ul li { overflow: hidden; margin-top: 28px;}
-.cover-thumbnail-2 ul li a { display: block; text-decoration: none;}
-.cover-thumbnail-2 ul li figure { float: right; width: 128px; margin-left: 57px;}
-.cover-thumbnail-2 ul li figure img { width: 100%; height: auto; border: 1px solid #f1f1f1; box-sizing: border-box;}
-.cover-thumbnail-2 ul li .title { display: block; overflow: hidden; max-width: 95%; margin-bottom: 10px; padding-top: 7px; text-overflow: ellipsis; white-space: nowrap; font-size: 1.25em; line-height: 1.4;}
-.cover-thumbnail-2 ul li .excerpt { overflow: hidden; max-width: 95%; margin-bottom: 20px; text-overflow: ellipsis; font-size: 16px; line-height: 1.5rem; color: #999; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;}
-.cover-thumbnail-2 ul li .meta { display: block; font-size: 0.75em; color: #999;}
-.cover-thumbnail-3 { position: relative; margin-bottom: 77px;}
-.cover-thumbnail-3 h2 { margin-bottom: 19px; font-weight: 500; font-size: 1em; color: #555;}
-.cover-thumbnail-3 ul { position: relative; display: inline-block; margin-left: -3.378378378378378%; margin-bottom: -25px; vertical-align: top;}
-.cover-thumbnail-3 ul li { float: left; margin-bottom: 22px; box-sizing: border-box;}
-.cover-thumbnail-3 ul li a { display: block; text-decoration: none;}
-.cover-thumbnail-3 ul li figure { display: block; width: 100%; height: 0; margin-bottom: 11px; padding-bottom: 129.6875%; background-color: #f8f8f8;}
-.cover-thumbnail-3 ul li figure img { width: 100%; height: auto; border: 1px solid #f1f1f1; box-sizing: border-box;}
-.cover-thumbnail-3 ul li .title { display: block; overflow: hidden; width: 95%; text-overflow: ellipsis; white-space: nowrap; font-size: 0.8125em; line-height: 1.4;}
-.layout-aside-left #aside { float: left; margin-left: 0; padding: 80px 0;}
-#aside { width: 21.296296296296296%; box-sizing: border-box;}
-.sidebar .category { margin-bottom: 36px;}
-.sidebar .category ul li { padding: 0; font-size: 0.875em; font-weight: 600;}
-.sidebar ul li { line-height: 1.25rem; color: #777;}
-.sidebar .category ul li a { color: #555;}
-.sidebar .category ul li ul { padding-top: 8px;}
-.sidebar .category ul li ul li { padding: 6px 0 7px; font-weight: 400; font-size: 1em;}
-.sidebar .category ul li ul li ul { overflow: hidden; margin-bottom: -4px; padding-top: 6px;}
-.sidebar .category ul li ul li ul li { position: relative; padding: 3px 0 3px 9px;font-size: 0.8125rem;}
-.sidebar .sidebar-2 { margin-top: 38px;  padding-top: 46px; border-top: 1px solid #eee;} */
-
+/*왼쪽 사이드*/
+.sidebar { display: inline-block; top: 800px; right: 210px;}
+.sidebar .left_side { position: absolute; margin-bottom: 46px; border-color: #e8e8e8; border-top: 3px solid #e0e0e0; width: 290px; /* margin-top:900px; */ }
+.sidebar .left_side h2 { font-family: 'GmarketSansLight'; /* margin-bottom: 12px; */ font-weight: 800; font-size: 1.075em; color: #555; /* margin-top: 12px; */ text-align: center; border-bottom: 1px solid #e0e0e0;  padding: 10px;}
+/* .sidebar .tab-ui */ h2 a:first-child{margin-right:30px;}
+.sidebar .left_side h2 .recent { color: #333;}
+.sidebar .left_side h2 .popular { color: #333333a1;}
+.sidebar .left_side ul li { overflow: hidden; margin-bottom: 18px; padding: 0;}
+.sidebar ul li { font-size: 0.8125em; line-height: 1.25rem; color: #777;}
+.sidebar .left_side ul li a { display: block; overflow: hidden; text-decoration: none; }
+.sidebar ul li a { color: #777; }
+.sidebar .left_side ul li .title { display: -webkit-box; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; -webkit-box-orient: vertical; } 
+.sidebar .left_side ul li .date { display: block; margin-top: 6px; font-size: 0.75rem; line-height: 1; }
+.sidebar .left_side .tags { margin: 0 0 41px; /* padding:15px; */ width:290px; font-size: 1.075em; font-weight: 800; border-top: 3px solid #e0e0e0; border-bottom: 3px solid #e0e0e0; }
+.sidebar .left_side .tags h2 { margin-bottom: 8px; font-size: 0.875em; }
+.sidebar .left_side .tags a { float: none; margin: 0 4px 0 0; padding: 6px; border: 0; font-size: 0.8125em; line-height: 2; color: #555; }
+.sidebar .left_side .tags .tag_a {padding:20px;}
 /*전체 배경*/
-#all_wrap { height:1300px; max-width:1200px; margin: 0 auto; background-color: white; margin-top:20px; margin-bottom:20px;width: calc(1700px/2);}
+#all_wrap_main { height:1600px; max-width:1200px; margin: 0 auto; background-color: white; margin-top:20px; margin-bottom:20px;width: calc(1700px/2);}
+#all_wrap{ height:1600px; max-width:1800px; margin: 0 auto; background-color: white; margin-top:20px; margin-bottom:20px;/* width: calc(1700px/2); */}
+
+/*바디*/
+#content {/*  padding-bottom: 43px; */ float: left; width: 80%; padding: 32px 60px; box-sizing: border-box; margin-left: 18px;}
+.post-header { padding-top: 4px; }
+.post-header h1 { margin-bottom: 18px; font-size: 1em; line-height: 1.375; }
+.post-header h1 em { margin-left: 7px; font-style: normal; }
+.post-header h1 em { color: #04beb8; }
+.post-item:nth-child(3n+1) { clear: both; margin-left: 0; }
+.post-item { float: left; width: 31.081081081081081%; margin: 0 0 58px 3.378378378378378%; }
+.post-item a { display: block; text-decoration: none; }
+.post-item .thum { position: relative; display: block; overflow: hidden; width: 100%; height: 0; margin-bottom: 5px; padding-bottom: 60.869565217391304%; background-color: #f8f8f8; }
+.post-item .thum img { width: 100%; height: auto; -webkit-transform: translateY(-25%); border: none; vertical-align: top; }
+.post-item .title { display: block; overflow: hidden; max-width: 98%; margin-bottom: 4px; padding-top: 9px; text-overflow: ellipsis; white-space: nowrap; line-height: 1.4; }
+.post-item .excerpt { overflow: hidden; max-width: 95%; margin-bottom: 15px; text-overflow: ellipsis; font-size: 0.8125em; line-height: 1.5rem; color: #999; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+.post-item .meta { display: block; font-size: 0.75em; color: #999; }
+.pagination { margin-bottom: 60px; text-align: center; }
+.pagination .prev, .pagination .next { width: 22px; height: 22px; border: 1px solid #eee; border-radius: 50%; background: url(./images/ico_package.png) no-repeat 0 -50px; text-indent: -999em; }
+.pagination a { display: inline-block; margin: 0 12px; font-size: 0.875em; line-height: 1.5rem; vertical-align: top; color: #999; }
+.pagination .selected { color: #333; }
+.pagination .next { background-position-x: -50px; }
+
 
 /* 공통  디자인  */
 button { overflow: visible; margin: 0; padding: 0; border: 0; background: transparent;}
 ul li { list-style: none;}
-a, a:link { text-decoration: none; color: #555;}
+a, a:link { text-decoration: none;  color: #777; }
 p { display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px;}
 div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, figure { margin: 0; padding: 0; display: block;}
 ul { display: block; list-style-type: disc; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; padding-inline-start: 40px;}
-ul ul { list-style-type: circle; margin-block-start: 0px; margin-block-end: 0px;}
+ul ul { list-style-type: circle; margin-block-start: 0px; margin-block-end: 0px; margin-top: 15px;}
 ul ul ul { list-style-type: square;}   
 element.style { left: 0px; width: 543px;}
