@@ -16,18 +16,30 @@
 		<property name="password" value="nablog" />
 	</bean>
 
-	<!-- HikariCP configuration -->
+	<!-- HikariCP configuration 커넥션 pool을 사용할 dataSource bean 셋팅-->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
 	</bean>
 
+	<!-- DB Connection 및 SQL 전달/ 리턴을 위한 SQLSession을 만들어 내는 SQLSessionFactory bean 셋팅 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
+	<!-- Mapper 스캔 basePackage 를 이용해서 인터페이스 파일이 저장될 매퍼를 지정-->
+<!-- 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+		<property name="basePackage" value="com.kr.test.mapper" />
+
+	</bean> -->
+	
+	
+	
+	<!-- @Component가 작성된 Class를 bean으로 인식 -->
 	<context:component-scan base-package="com.sj.nablog"/>
 	
+	<!-- base-package에 정의된 package 내 클래스 및 xml을 SQL 처리를 위한 mapper로 인식 -->
 	<mybatis-spring:scan base-package="com.sj.nablog.mapper" />
 	
 </beans>

@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="main" value="${main}"/>	
+<c:set var="menuMainList" value="${menuMainList}"/>	
+<c:set var="menuList" value="${menuList}"/>	
 <!DOCTYPE html>
 <html>
 
@@ -18,10 +20,36 @@
 			<div class="menu">
 				<a> <img src="resources/images/icons8-menu.png" alt="카테고리"></a>
 				<ul class="hide">
-					<li><a href="#">메뉴 메인카테고리1 (10)</a><img src="resources/images/icons8-plus.png" id="img_1" onclick="showSubHide(1);">
+
+					<c:forEach var="no" items="${menuMainList}" varStatus="index">
+
+						<li>
+							<a href="#">${no.menuTit}(10)</a>
+							<img src="resources/images/icons8-plus.png" id="img_${index.index+1}" onclick="showSubHide(${index.index+1});">
+							
+							<ul class="sub_hide" id="sub_hide_${index.index+1}">
+								<c:forEach var="subno" items="${menuList}">
+									
+									<c:if test="${subno.menuCateRef eq no.menuCateNo }">
+										<li>
+											<a href="${ pageContext.servletContext.contextPath}/list.do">${subno.menuTit}(7)</a>
+										</li>
+									</c:if>
+								
+								</c:forEach>
+							</ul>
+						</li>
+
+					</c:forEach>
+
+
+
+					<%-- 	
+					<li >
+					<a href="#">메뉴 메인카테고리1 (10)</a><img src="resources/images/icons8-plus.png" id="img_1" onclick="showSubHide(1);">
 						<ul class="sub_hide" id="sub_hide_1">
 							<li><a href="${ pageContext.servletContext.contextPath}/list.do">카테고리1-1 (7)</a></li>
-							<li><a href="#">카테고리1-2 (5)</a></li>
+							<li><a href="#">카테고리1-2 (5)</a></li><!--  -->
 							<li><a href="#">카테고리1-3 (8)</a></li>
 						</ul>
 					</li>
@@ -40,7 +68,7 @@
 							<li><a href="#">카테고리3-2 (5)</a></li>
 							<li><a href="#">카테고리3-3 (6)</a></li>
 						</ul>
-					</li>
+					</li> --%>
 				</ul>
 				<div class="left_side_bar">
 				<c:import url="/WEB-INF/views/common/leftSideBar.jsp" />
@@ -79,7 +107,7 @@
 			$(".sub_hide").hide();
 			//왼쪽 사이드바 숨기기
 			$(".left_side_bar").hide();
-
+			
 			//메인 페이지 일때만 다음 기능이 실행 되도록 한다 (다른 페이지에서는 목록은 계속 보여진 채로)
 			var main = '<c:out value="${main}"/>';
 
@@ -88,17 +116,7 @@
 				$(".menu>a").click(function() {
 					
 					 $(this).next("ul").slideToggle(); // slideUp/Down 기능 모두 포함
-				/* 	var submenu = $(this).next("ul");
-
-					// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-					if (submenu.is(":visible")) {
-
-						submenu.slideUp();
-
-					} else {
-
-						submenu.slideDown();
-					} */
+				
 				});
 			}
 

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class MenuVO {
 	
-	private String menuId; //메뉴 아이디
-	private String cateYn; //카테고리 여부
+	private int menuCateNo; //메뉴 카테고리 번호
+	private int menuCateRef; //메뉴 카테고리 참조번호
 	private String menuTit; //메뉴 제목
 }

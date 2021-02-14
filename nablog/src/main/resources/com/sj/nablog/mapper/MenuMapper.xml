@@ -1,1 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sj.nablog.mapper.MenuMapper">
+	
+	<resultMap id="resultList" type="com.sj.nablog.model.domain.MenuVO">
+		<id property="menuCateNo" column="menu_cate_no" />
+		<result property="menuCateRef" column="menu_cate_ref"/>
+		<result property="menuTit" column="menu_tit"/>
+	</resultMap>
+	
+	<select id="selectList" resultMap="resultList">
+		SELECT * FROM MENU
+	
+	</select>
+	
+	<!-- 메인 카테고리 (메인제외) 조회 -->
+	<select id="selectMainList" resultMap="resultList">
+		SELECT * FROM MENU WHERE MENU_CATE_REF =0 AND MENU_CATE_NO != 0
+	
+	</select>
+
+</mapper>

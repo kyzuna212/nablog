@@ -11,5 +11,5 @@ public interface BoardMapper {
 	@Select("SELECT * FROM board WHERE bno >0")
 	public List<BoardVO> getList();
 	
-	public String getTime2();
+
 }
