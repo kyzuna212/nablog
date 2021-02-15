@@ -24,7 +24,7 @@
 					<c:forEach var="no" items="${menuMainList}" varStatus="index">
 
 						<li>
-							<a href="#">${no.menuTit}(10)</a>
+							<a href="${pageContext.servletContext.contextPath}/list.do?menuTit=${no.menuTit}">${no.menuTit}(10)</a>
 							<img src="resources/images/icons8-plus.png" id="img_${index.index+1}" onclick="showSubHide(${index.index+1});">
 							
 							<ul class="sub_hide" id="sub_hide_${index.index+1}">
@@ -32,7 +32,7 @@
 									
 									<c:if test="${subno.menuCateRef eq no.menuCateNo }">
 										<li>
-											<a href="${ pageContext.servletContext.contextPath}/list.do">${subno.menuTit}(7)</a>
+											<a href="${pageContext.servletContext.contextPath}/list.do?menuTit=${subno.menuTit}">${subno.menuTit}(7)</a>
 										</li>
 									</c:if>
 								

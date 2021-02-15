@@ -3,7 +3,7 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="menu" value="${menu}"/>
+<c:set var="menuTit" value="${menuTit}"/>
 
 <!DOCTYPE html>
 <html>
@@ -27,14 +27,14 @@
 
 				<div class="post-header">
 					<h1>
-						<span>메뉴 메인카테고리1</span><em>10</em>
+						<span>${menuTit}</span><em>10</em>
 					</h1>
 				</div>
 				<!-- 한 페이지에 썸네일 9개씩  -->
 				<div class="inner">
 
 					<div class="post-item">
-						<a href="#"> <span class="thum"> <img src="#" alt="">
+						<a href="${pageContext.servletContext.contextPath}/detail.do"> <span class="thum"> <img src="#" alt="">
 
 						</span> <span class="title">동력은 바로 이것이다</span> <span class="excerpt">천고에
 								사라지지 않는 것이다 이것은 현저하게 일월과 같은 예가 되려니와 그와 같지 못하다 할지라도 창공에 반짝이는 뭇 별과
