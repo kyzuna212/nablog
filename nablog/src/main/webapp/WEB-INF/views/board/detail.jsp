@@ -14,13 +14,13 @@
 <c:import url="/WEB-INF/views/common/header.jsp" />
 </head>
 <body>
-	<section id="container">
+	<section id="container_wrap">
 
 		<div class="content-wrap">
-			<article id="content">
+			<article id="content_detail">
 				<div class="inner">
 
-					<div class="post-cover">
+					<div class="post-cover-detail">
 						<div class="inner">
 							<span class="category">카테고리명</span>
 							<h1>콘텐츠 제목</h1>
@@ -36,7 +36,7 @@
 						<br>
 						<p>본문 내용이 나오는 곳</p>
 						<br>
-							<div class="container_postbtn #post_button_group">
+							<div class="container_postbtn_detail #post_button_group">
 								<div class="postbtn_like">
 									<div class="wrap_btn" id="reaction-159">
 										<button class="btn_post uoc-icon">
@@ -79,14 +79,14 @@
 
 								<div class="postbtn_ccl" data-ccl-type="3">
 									<a href="#"
-										target="_blank" class="link_ccl"> <span class="bundle_ccl">
+										target="_blank" class="link_ccl"> <span class="bundle_ccl_detail">
 											<span class="ico_postbtn ico_ccl1">저작자표시</span>
 									</span>
 									</a>
 								</div>
 							</div>
 
-							<div class="another_category another_category_color_gray">
+							<div class="another_category_detail another_category_color_gray">
 								<h4>
 									'<a href="#">카테고리명</a>' 카테고리의 다른 글
 								</h4>
@@ -118,7 +118,7 @@
 							</div>
 						</div>
 
-						<div class="related-articles">
+						<div class="related-articles-detail">
 							<h2>관련글</h2>
 							<ul>
 
@@ -149,7 +149,7 @@
 							</ul>
 						</div>
 
-						<div class="related-articles">
+						<div class="related-articles-detail">
 							<h2>관련글</h2>
 							<ul>
 
@@ -180,7 +180,7 @@
 							</ul>
 						</div>
 
-						<div class="comments">
+						<div class="comments_detail">
 							<h2>
 								댓글<span class="count"><span id="commentCount159_0">0</span></span>
 							</h2>
@@ -189,7 +189,7 @@
 
 								<form method="post" action="#"
 									onsubmit="return false" style="margin: 0">
-									<div class="comment-form">
+									<div class="comment-form-detail">
 
 										<div class="field">
 
@@ -206,7 +206,7 @@
 										<textarea name="comment" cols="" rows="4"
 											placeholder="여러분의 소중한 댓글을 입력해주세요."></textarea>
 										<div class="submit">
-											<button type="submit" class="btn"
+											<button type="submit" class="btn_detail"
 												onclick="#">등록</button>
 										</div>
 									</div>
@@ -216,7 +216,7 @@
 						</div>
 					</div>
 					
-					<div class="pagination">
+					<div class="pagination_detail">
 						<a href="#" class="prev ">이전</a>
 						
 							<a href="#"><span>1</span></a>
