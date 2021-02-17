@@ -31,8 +31,8 @@
 					</h1>
 				</div>
 				<!-- 한 페이지에 썸네일 9개씩  -->
-				<div class="inner">
-
+			<!-- 	<div class="inner">
+ -->
 					<div class="post-item">
 						<a href="${pageContext.servletContext.contextPath}/detail.do"> <span class="thum"> <img src="#" alt="">
 
@@ -102,7 +102,7 @@
 						</a>
 					</div>
 
-					<div class="post-item">
+					 <div class="post-item">
 						<a href="#"> <span class="thum"> </span> <span class="title">
 								다음을 가리키는 말이다.</span> <span class="excerpt">하룻밤 자고 나면 사라지는 꿈처럼 너를
 								oh~ 잊게될까 두려워져 무심히 널 떠올리게 되면 불안해지는 맘 어떻게 해야하니 안녕 이제는 안녕 이 말 도저히 할
@@ -131,7 +131,7 @@
 						</a>
 					</div>
 
-				</div>
+				<!-- </div> -->
 
 
 				<div class="pagination">
@@ -142,7 +142,7 @@
 					<a href="#"><span>4</span></a> <a><span>···</span></a> <a
 						href="#"><span>13</span></a> <a href="#"
 						class="next ">다음</a>
-				</div>
+				 </div>
 
 			</article>
 		</div>

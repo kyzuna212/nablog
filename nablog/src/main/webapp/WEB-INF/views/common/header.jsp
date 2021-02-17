@@ -19,8 +19,9 @@
 		<div class="util">
 			<div class="menu">
 				<a> <img src="resources/images/icons8-menu.png" alt="카테고리"></a>
+				<div class="hide_wrap">
 				<ul class="hide">
-
+					
 					<c:forEach var="no" items="${menuMainList}" varStatus="index">
 
 						<li>
@@ -37,11 +38,13 @@
 									</c:if>
 								
 								</c:forEach>
+								
 							</ul>
+							
 						</li>
-
+				
 					</c:forEach>
-
+					
 
 
 					<%-- 	
@@ -70,9 +73,13 @@
 						</ul>
 					</li> --%>
 				</ul>
+				</div>
+				
 				<div class="left_side_bar">
 				<c:import url="/WEB-INF/views/common/leftSideBar.jsp" />
 				</div>
+			
+				
 			</div>
 
 			<div class="right_menubar">

@@ -15,6 +15,7 @@
 <body>
 	<div class="sidebar">
 		<div class="left_side">
+			<div class="hide_wrap">
 			<h2>
 				<a href="javascript:changeMenu(1);" class="recent">최근글</a>
 				<a href="javascript:changeMenu(2);" class="popular">인기글</a>
@@ -117,6 +118,7 @@
 						<a href="#">개발자</a> <a href="#">웹개발</a> <a href="#">스프링</a> <a
 						href="#">java</a> <a href="#">javascript</a>
 					</div>
+			</div>
 			</div>
  		</div> 
 	</div>
