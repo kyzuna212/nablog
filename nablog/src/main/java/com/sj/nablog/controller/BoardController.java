@@ -63,4 +63,9 @@ public class BoardController {
 		
 		return "board/detail";
 	}
+	
+	@RequestMapping("/edit.do")
+	public String moveEditPage(Model model) {
+		return "board/edit";
+	}
 }

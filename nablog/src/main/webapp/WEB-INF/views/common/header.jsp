@@ -19,7 +19,7 @@
 		<div class="util">
 			<div class="menu">
 				<a> <img src="resources/images/icons8-menu.png" alt="카테고리"></a>
-				<div class="hide_wrap">
+			<!-- 	<div class="hide_wrap"> -->
 				<ul class="hide">
 					
 					<c:forEach var="no" items="${menuMainList}" varStatus="index">
@@ -73,7 +73,7 @@
 						</ul>
 					</li> --%>
 				</ul>
-				</div>
+				
 				
 				<div class="left_side_bar">
 				<c:import url="/WEB-INF/views/common/leftSideBar.jsp" />
@@ -119,9 +119,10 @@
 			var main = '<c:out value="${main}"/>';
 
 			if (main == 'main') {
+				
 				// menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
 				$(".menu>a").click(function() {
-					
+				
 					 $(this).next("ul").slideToggle(); // slideUp/Down 기능 모두 포함
 				
 				});

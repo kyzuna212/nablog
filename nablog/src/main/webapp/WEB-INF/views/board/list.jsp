@@ -27,7 +27,8 @@
 
 				<div class="post-header">
 					<h1>
-						<span>${menuTit}</span><em>10</em>
+						<span>${menuTit}</span><em>10</em> 
+						<a href="${pageContext.servletContext.contextPath}/edit.do">글쓰기</a>
 					</h1>
 				</div>
 				<!-- 한 페이지에 썸네일 9개씩  -->
