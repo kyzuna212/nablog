@@ -149,6 +149,9 @@ input[type="password" i] { -webkit-text-security: disc !important; }
 .pagination_detail .prev, .pagination_detail .next { width: 22px; height: 22px; border: 1px solid #eee; border-radius: 50%; background: url(./images/ico_package.png) no-repeat 0 -50px; text-indent: -999em; }
 .pagination_detail a { display: inline-block; margin: 0 12px; font-size: 0.875em; line-height: 1.5rem; vertical-align: top; color: #999; } */
 
+/*로그인*/
+.text-form{  margin: 150px 200px;}
+.loginBtn{}
 
 /* 공통  디자인  */
 button { overflow: visible; margin: 0; padding: 0; border: 0; background: transparent;}

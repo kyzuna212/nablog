@@ -86,7 +86,7 @@
 				<a href="${ pageContext.servletContext.contextPath}/about.do"
 					class="about">about me</a>
 
-				<%-- 	<a href="${ pageContext.servletContext.contextPath}/contact.do" class="contact">contact me</a> --%>
+				<a href="${ pageContext.servletContext.contextPath}/mlogin.do" class="contact">admin</a> 
 			</div>
 				
 			<div class="search">
