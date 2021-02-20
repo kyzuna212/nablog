@@ -24,7 +24,8 @@
 						<div class="inner">
 							<span class="category">카테고리명</span>
 							<h1>콘텐츠 제목</h1>
-							<span class="meta"> <span class="author">by 나츠키</span>
+							<span class="meta"> 
+								<!-- <span class="author">by 나츠키</span> -->
 								<span class="date">2020. 5. 20.</span>
 
 							</span>
@@ -33,9 +34,9 @@
 
 					<div class="entry-content">
 						<div class="tt_article_useless_p_margin">
-						<br>
-						<p>본문 내용이 나오는 곳</p>
-						<br>
+							<div class="main_contents">
+								<p>본문 내용이 나오는 곳</p>
+							</div>
 							<div class="container_postbtn_detail #post_button_group">
 								<div class="postbtn_like">
 									<div class="wrap_btn" id="reaction-159">
@@ -95,89 +96,27 @@
 										<tr>
 											<th><a href="#">다른 글의 제목임</a>&nbsp;&nbsp;<span>(0)</span>
 											</th>
-											<td>2019.11.10</td>
+										<!-- 	<td>2019.11.10</td> -->
 										</tr>
 										<tr>
 											<th><a href="#" class="current">또 다른 글 제목임</a>&nbsp;&nbsp;<span>(0)</span></th>
-											<td>2020.12.10</td>
+											<!-- <td>2020.12.10</td> -->
 										</tr>
 										<tr>
 											<th><a href="#">블로그 글 제목임</a>&nbsp;&nbsp;<span>(0)</span></th>
-											<td>2021.01.07</td>
+											<!-- <td>2021.01.07</td> -->
 										</tr>
 										<tr>
 											<th><a href="#">또 다른 블로그 글 제목임</a>&nbsp;&nbsp;<span>(0)</span></th>
-											<td>2021.01.16</td>
+											<!-- <td>2021.01.16</td> -->
 										</tr>
 										<tr>
 											<th><a href="#">블로그제목이여</a>&nbsp;&nbsp;<span>(0)</span></th>
-											<td>2021.02.04</td>
+											<!-- <td>2021.02.04</td> -->
 										</tr>
 									</tbody>
 								</table>
 							</div>
-						</div>
-
-						<div class="related-articles-detail">
-							<h2>관련글</h2>
-							<ul>
-
-								<li><a href="#">
-										<figure>
-
-										</figure> <span class="title">관련글 타이틀임</span>
-								</a></li>
-
-								<li><a href="#">
-										<figure>
-
-										</figure> <span class="title">다른 관련글 타이틀</span>
-								</a></li>
-
-								<li><a href="#">
-										<figure>
-
-										</figure> <span class="title">관련글 제목임</span>
-								</a></li>
-
-								<li><a href="#">
-										<figure>
-
-										</figure> <span class="title">관련글 제목목목</span>
-								</a></li>
-
-							</ul>
-						</div>
-
-						<div class="related-articles-detail">
-							<h2>관련글</h2>
-							<ul>
-
-								<li><a href="#">
-										<figure>
-
-										</figure> <span class="title">글 제목1</span>
-								</a></li>
-
-								<li><a href="#">
-										<figure>
-
-										</figure> <span class="title">글제목22</span>
-								</a></li>
-
-								<li><a href="#">
-										<figure>
-
-										</figure> <span class="title">글 제목33</span>
-								</a></li>
-
-								<li><a href="#">
-										<figure>
-
-										</figure> <span class="title">글제목44</span>
-								</a></li>
-
-							</ul>
 						</div>
 
 						<div class="comments_detail">
@@ -251,5 +190,19 @@
 			</article>
 		</div>
 	</section>
+	
+	<script> 
+   
+    $(document).ready(function(){
+    	//main페이지를 제외한 나머지 페이지에서는 목록을 항상 보이게 한다
+    	
+    	$(".sub_hide").show();
+    	$("#header .util .menu .hide").show();
+    	$(".left_side_bar").show();
+
+    });
+    </script>
+    <!-- 푸터 -->
+<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
