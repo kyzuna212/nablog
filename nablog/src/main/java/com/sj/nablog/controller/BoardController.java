@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sj.nablog.model.domain.MenuVO;
+import com.sj.nablog.model.service.BoardService;
 import com.sj.nablog.model.service.MenuService;
 
 import lombok.AllArgsConstructor;
@@ -26,21 +27,15 @@ public class BoardController {
 	@Setter(onMethod_ = {@Autowired})
 	private MenuService menuService ;
 	
+	@Setter(onMethod_ = {@Autowired})
+	private BoardService boardService;
+	
 	//목록 페이지로 이동
 	@RequestMapping("/list.do")
-	public String movePage(@RequestParam("menuTit") String menuTit, Model model) {
-		
-		
-		
-		ArrayList<MenuVO> menuMainList = new ArrayList<MenuVO>();
-		ArrayList<MenuVO> menuList = new ArrayList<MenuVO>();
-		
-		menuMainList = menuService.selectMainList();
-		menuList = menuService.selectList();
-		
-		model.addAttribute("menuMainList", menuMainList);
-		model.addAttribute("menuList", menuList);
-		model.addAttribute("menuTit", menuTit);
+	public String movePage(@RequestParam("menuCateNo") int menuCateNo, Model model) {
+	
+		model.addAttribute("boardList", boardService.selectList(menuCateNo));
+		model.addAttribute("menu", menuService.selectOne(menuCateNo));
 		
 		return "board/list";
 	}
@@ -49,18 +44,6 @@ public class BoardController {
 	@RequestMapping("/detail.do")
 	public String moveDetailPage(Model model) {
 
-		/*
-		 * ArrayList<MenuVO> menuMainList = new ArrayList<MenuVO>(); ArrayList<MenuVO>
-		 * menuList = new ArrayList<MenuVO>();
-		 * 
-		 * menuMainList = menuService.selectMainList(); menuList =
-		 * menuService.selectList();
-		 * 
-		 * model.addAttribute("menuMainList", menuMainList);
-		 * model.addAttribute("menuList", menuList); model.addAttribute("menuTit",
-		 * menuTit);
-		 */
-		
 		return "board/detail";
 	}
 	

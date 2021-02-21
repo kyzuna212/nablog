@@ -19,10 +19,8 @@ public class MenuServiceImpl implements MenuService{
 	//전체 메뉴 조회
 	@Override
 	public ArrayList<MenuVO> selectList() {
-		
-		ArrayList<MenuVO> list = menuMapper.selectList();
-		
-		return list;
+	
+		return  menuMapper.selectList();
 	}
 
 	
@@ -30,8 +28,15 @@ public class MenuServiceImpl implements MenuService{
 	@Override
 	public ArrayList<MenuVO> selectMainList() {
 		
-		ArrayList<MenuVO> list = menuMapper.selectMainList();
-		return list;
+		return menuMapper.selectMainList();
+	}
+
+	
+	/*메뉴 카테고리번호에 헤당하는 메뉴 정보를 가져옵니다*/
+	@Override
+	public MenuVO selectOne(int menuCateNo) {
+		
+		return menuMapper.selectOne(menuCateNo);
 	}
 
 }

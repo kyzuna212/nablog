@@ -1,5 +1,6 @@
 package com.sj.nablog.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
@@ -8,8 +9,15 @@ import com.sj.nablog.model.domain.BoardVO;
 
 public interface BoardMapper {
 	
-	@Select("SELECT * FROM board WHERE bno >0")
-	public List<BoardVO> getList();
+
+	/*메뉴카테고리에 해당하는 글 목록을 가져옵니다*/
+	public ArrayList<BoardVO> selectList(int menuCateNo);
+
+	/*전체 카테고리의 글에서 최근에 쓰여진 글 5개를 가져옵니다*/
+	public ArrayList<BoardVO> selectRecent();
+
+	/*전체 카테고리의 글에서 가장 조회수가 높은 글 5개를 가져옵니다*/
+	public ArrayList<BoardVO> selectPopular();
 	
 
 }

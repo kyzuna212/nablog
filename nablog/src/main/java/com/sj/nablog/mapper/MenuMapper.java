@@ -12,4 +12,7 @@ public interface MenuMapper {
 	
 	ArrayList<MenuVO> selectMainList();
 
+	/*메뉴 카테고리번호에 헤당하는 메뉴 정보를 가져옵니다*/
+	MenuVO selectOne(int menuCateNo);
+
 }

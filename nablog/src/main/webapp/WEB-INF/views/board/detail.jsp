@@ -193,14 +193,13 @@
 	
 	<script> 
    
-    $(document).ready(function(){
-    	//main페이지를 제외한 나머지 페이지에서는 목록을 항상 보이게 한다
-    	
-    	$(".sub_hide").show();
-    	$("#header .util .menu .hide").show();
-    	$(".left_side_bar").show();
+	   $(document).ready(function(){
+	    	//main페이지를 제외한 나머지 페이지에서는 목록을 항상 보이게 한다
+	    /* 	$(".sub_hide").show();
+	    	$(".hide").show(); */
+	    	$(".left_side_bar").show();
 
-    });
+	    }); 
     </script>
     <!-- 푸터 -->
 <c:import url="/WEB-INF/views/common/footer.jsp" />

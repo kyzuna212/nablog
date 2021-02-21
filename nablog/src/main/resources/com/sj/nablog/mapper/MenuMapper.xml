@@ -19,4 +19,9 @@
 	
 	</select>
 
+	<select id="selectOne" resultMap="resultList">
+		SELECT * FROM MENU WHERE MENU_CATE_NO=#{menuCateNo}
+	
+	</select>
+	
 </mapper>

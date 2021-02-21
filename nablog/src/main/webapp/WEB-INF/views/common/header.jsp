@@ -5,6 +5,11 @@
 <c:set var="main" value="${main}"/>	
 <c:set var="menuMainList" value="${menuMainList}"/>	
 <c:set var="menuList" value="${menuList}"/>	
+<c:set var="menu" value="${menu}"/>
+<c:set var="boardList" value="${boardList}"/>
+<c:set var="recentList" value="${recentList}"/>
+<c:set var="popularList" value="${popularList}"/>
+
 <!DOCTYPE html>
 <html>
 
@@ -25,7 +30,7 @@
 					<c:forEach var="no" items="${menuMainList}" varStatus="index">
 
 						<li>
-							<a href="${pageContext.servletContext.contextPath}/list.do?menuTit=${no.menuTit}">${no.menuTit}(10)</a>
+							<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${no.menuCateNo}">${no.menuTit}(10)</a>
 							<img src="resources/images/icons8-plus.png" id="img_${index.index+1}" onclick="showSubHide(${index.index+1});">
 							
 							<ul class="sub_hide" id="sub_hide_${index.index+1}">
@@ -33,7 +38,7 @@
 									
 									<c:if test="${subno.menuCateRef eq no.menuCateNo }">
 										<li>
-											<a href="${pageContext.servletContext.contextPath}/list.do?menuTit=${subno.menuTit}">${subno.menuTit}(7)</a>
+											<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${subno.menuCateNo}">${subno.menuTit}(7)</a>
 										</li>
 									</c:if>
 								
@@ -46,32 +51,6 @@
 					</c:forEach>
 					
 
-
-					<%-- 	
-					<li >
-					<a href="#">메뉴 메인카테고리1 (10)</a><img src="resources/images/icons8-plus.png" id="img_1" onclick="showSubHide(1);">
-						<ul class="sub_hide" id="sub_hide_1">
-							<li><a href="${ pageContext.servletContext.contextPath}/list.do">카테고리1-1 (7)</a></li>
-							<li><a href="#">카테고리1-2 (5)</a></li><!--  -->
-							<li><a href="#">카테고리1-3 (8)</a></li>
-						</ul>
-					</li>
-					
-					
-					<li><a href="#">메뉴 메인카테고리2 (2)</a><img src="resources/images/icons8-plus.png" id="img_2" onclick="showSubHide(2);">
-						<ul class="sub_hide" id="sub_hide_2">
-							<li><a href="#">카테고리2-1 (1)</a></li>
-							<li><a href="#">카테고리2-2 (2)</a></li>
-							<li><a href="#">카테고리2-3 (3)</a></li>
-						</ul>
-					</li>
-					<li><a href="#">메뉴 메인카테고리3 (3)</a><img src="resources/images/icons8-plus.png" id="img_3" onclick="showSubHide(3);">
-						<ul class="sub_hide" id="sub_hide_3">
-							<li><a href="#">카테고리3-1 (4)</a></li>
-							<li><a href="#">카테고리3-2 (5)</a></li>
-							<li><a href="#">카테고리3-3 (6)</a></li>
-						</ul>
-					</li> --%>
 				</ul>
 				
 				
@@ -90,12 +69,13 @@
 			</div>
 				
 			<div class="search">
-
+				<form action="#">
 				<input type="text" class="input_text" name="search" value=""  placeholder="검색내용을 입력하세요" onfocus="this.placeholder=''" 
 					onblur="this.placeholder='검색내용을 입력하세요'">
 				<button type="submit" onclick="showText();">
 					<img src="resources/images/icons8-search.png" alt="검색">
 				</button>
+				</form>
 
 			</div>
 
@@ -106,7 +86,10 @@
 
 	<script> 
     // 실행 순서 (java-jstl-html-javascript)
-
+	
+   /*  var statusShow = "";
+    var statusHide = ""; */
+    
 		$(document).ready(function() {
 			//input박스 숨기기
 			$("input.input_text").hide();
@@ -116,17 +99,32 @@
 			$(".left_side_bar").hide();
 			
 			//메인 페이지 일때만 다음 기능이 실행 되도록 한다 (다른 페이지에서는 목록은 계속 보여진 채로)
-			var main = '<c:out value="${main}"/>';
+		//	var main = '<c:out value="${main}"/>';
 
-			if (main == 'main') {
+		/* 	if (main == 'main') { */
 				
 				// menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
 				$(".menu>a").click(function() {
-				
-					 $(this).next("ul").slideToggle(); // slideUp/Down 기능 모두 포함
+					 $(this).next("ul").slideToggle(); // slideUp/Down 기능 모두 포함 */
+					
+					 /*  $(this).next("ul").slideToggle();
+					var menu =  $(this).next("ul");
+					 
+					// subhide 가 화면상에 보일때는 위로 부드럽게 접고 아니면 아래로 부드럽게 펼치기
+						if (menu.is(":visible")) {
+
+							menu.slideUp();
+							
+
+						} else {
+							
+							menu.slideDown();
+							
+						} */
+						
 				
 				});
-			}
+		/* 	} */
 
 		});
 		
@@ -134,6 +132,9 @@
 		function showText() {
 
 			$("input.input_text").fadeIn();
+			if( (".input_text").val() !=''){
+				
+			}
 
 		}
 
@@ -147,11 +148,14 @@
 
 				subhide.slideUp();
 				$('#img_'+seq).attr("src", "resources/images/icons8-plus.png");
+				/* statusHide = seq ; */
 
 			} else {
 
 				subhide.slideDown();
 				$('#img_'+seq).attr("src", "resources/images/icons8-minus.png");
+				/* statusShow = seq; */
+			
 			}
 			
 
