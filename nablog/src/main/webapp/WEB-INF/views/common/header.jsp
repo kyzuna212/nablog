@@ -37,7 +37,7 @@
 								<c:forEach var="subno" items="${menuList}">
 									
 									<c:if test="${subno.menuCateRef eq no.menuCateNo }">
-										<li>
+										<li class="${subno.menuCateNo}">
 											<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${subno.menuCateNo}">${subno.menuTit}(7)</a>
 										</li>
 									</c:if>
@@ -160,6 +160,13 @@
 			
 
 		}
+		
+		//쿠기 생성
+		function setCookie("menuStatus", value, 1) {  //변수 , 변수값,저장기간
+		    
+		}
+
+
 		
 
 	</script>

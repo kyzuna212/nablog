@@ -3,12 +3,42 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<!-- Appenders -->
+	<!-- 출력되는 형식 ConversionPattern-->
+    <!--name="console" : 클래스의 레퍼런스 변수 -->	
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<param name="Target" value="System.out" />
 		<layout class="org.apache.log4j.PatternLayout">
+			<!-- c: 클래스명 C:카테고리명  %m:메세지 출력 %n: 줄바꿈-->
+			 <!-- ConversionPattern : 고정값 -->
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
+	
+	<!-- 로그를 파일에 저장 -->​
+    <appender name="fileLogger" class="org.apache.log4j.DailyRollingFileAppender">
+        
+        <param name="file" value="C:\\Users\\USER\\nablog\\nablog\\src\\main\\resources\\logs\\system.log" />
+        <param name="Append" value="true" />
+        <param name="DatePattern" value="yyyy-MM-dd" />
+       
+        <layout class="org.apache.log4j.PatternLayout">
+        
+            <param name="ConversionPattern" value="[%d{HH:mm:ss}][%-5p][%F:%L] - %m%n" />
+
+        </layout>
+
+    </appender>
+
+    <!-- log4jdbc-remix 로그 출력 appender 추가 -->​
+    <appender name="sqlLogger" class="org.apache.log4j.ConsoleAppender">
+
+        <layout class="org.apache.log4j.PatternLayout">
+
+            <param name="ConversionPattern" value="%-5p: %m%n" />
+
+        </layout>
+
+    </appender>
 	
 	<!-- Application Loggers -->
 	<logger name="com.sj.nablog">
