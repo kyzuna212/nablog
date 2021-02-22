@@ -49,5 +49,12 @@
    
     </select>
    
+   	<!-- 전체 검색한 내용을 가져옵니다 -->
+   	<select id="selectFindList" resultMap="resultList">
+   		 SELECT *  
+   		 FROM BOARD 
+		 WHERE (b_title = #{search} OR b_cnt = #{search} OR b_tag = #{search})
+		 ORDER BY B_DATE DESC
+   	</select>
     
 </mapper>

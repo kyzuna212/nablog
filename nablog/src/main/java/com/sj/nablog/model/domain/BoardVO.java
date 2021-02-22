@@ -20,6 +20,8 @@ public class BoardVO {
 	private String rgbdId;	//게시글 작성자
 	private String bUsyn;	//게시글 사용여부 (Y:사용, N:삭제)
 	
+	/*검색*/
+	private String search; //검색
 	
 	public BoardVO() {}
 	
@@ -89,7 +91,13 @@ public class BoardVO {
 	public void setbUsyn(String bUsyn) {
 		this.bUsyn = bUsyn;
 	}
-
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", menuCateNo=" + menuCateNo + ", bTitle=" + bTitle + ", bCnt=" + bCnt

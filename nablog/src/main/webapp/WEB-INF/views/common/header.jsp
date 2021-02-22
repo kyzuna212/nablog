@@ -69,9 +69,10 @@
 			</div>
 				
 			<div class="search">
-				<form action="#">
+				<form action="/search" id="form">
 				<input type="text" class="input_text" name="search" value=""  placeholder="검색내용을 입력하세요" onfocus="this.placeholder=''" 
 					onblur="this.placeholder='검색내용을 입력하세요'">
+					<input type="hidden" name="menuCateNo" value="${menu.menuCateNo}">
 				<button type="submit" onclick="showText();">
 					<img src="resources/images/icons8-search.png" alt="검색">
 				</button>
@@ -133,7 +134,7 @@
 
 			$("input.input_text").fadeIn();
 			if( (".input_text").val() !=''){
-				
+				$.('#form').submit();
 			}
 
 		}

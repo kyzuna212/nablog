@@ -37,4 +37,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.selectPopular();
 	}
 
+	/*전체 검색한 내용을 가져옵니다*/
+	public ArrayList<BoardVO> selectFindList(BoardVO boardVO) {
+		
+		return boardMapper.selectFindList(boardVO);
+	}
+
 }

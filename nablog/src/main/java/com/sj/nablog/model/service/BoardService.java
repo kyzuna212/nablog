@@ -13,5 +13,8 @@ public interface BoardService {
 	public ArrayList<BoardVO> selectRecent();
 
 	/*전체 카테고리의 글에서 가장 조회수가 높은 글 5개를 가져옵니다*/
-	public ArrayList<BoardVO> selectPopluar(); 
+	public ArrayList<BoardVO> selectPopluar();
+
+	/*전체 검색한 내용을 가져옵니다*/
+	public ArrayList<BoardVO> selectFindList(BoardVO boardVO); 
 }

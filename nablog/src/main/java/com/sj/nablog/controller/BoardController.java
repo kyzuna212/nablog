@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sj.nablog.model.domain.BoardVO;
 import com.sj.nablog.model.domain.MenuVO;
 import com.sj.nablog.model.service.BoardService;
 import com.sj.nablog.model.service.MenuService;
@@ -47,8 +48,19 @@ public class BoardController {
 		return "board/detail";
 	}
 	
+	//글쓰기 페이지로 이동
 	@RequestMapping("/edit.do")
 	public String moveEditPage(Model model) {
 		return "board/edit";
+	}
+	
+	//검색하기
+	@RequestMapping("/search")
+	public String searchText(BoardVO boardVO, Model model) {
+		
+		model.addAttribute("boardList", boardService.selectFindList(boardVO));
+		model.addAttribute("menu", menuService.selectOne(boardVO.getMenuCateNo()));
+		
+		return "board/list";
 	}
 }
