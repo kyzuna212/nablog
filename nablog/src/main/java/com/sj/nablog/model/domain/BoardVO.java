@@ -8,6 +8,7 @@ import java.sql.Date;
 //@Data
 public class BoardVO {
 	
+	/*컬럼*/
 	private int bno; 	//게시글 번호
 	private int menuCateNo; 	//메뉴 카테고리 번호
 	private String bTitle; 	//게시글 제목
@@ -22,7 +23,7 @@ public class BoardVO {
 	
 	/*검색*/
 	private String search; //검색
-	
+
 	public BoardVO() {}
 	
 	public int getBno() {
@@ -91,6 +92,7 @@ public class BoardVO {
 	public void setbUsyn(String bUsyn) {
 		this.bUsyn = bUsyn;
 	}
+
 	public String getSearch() {
 		return search;
 	}

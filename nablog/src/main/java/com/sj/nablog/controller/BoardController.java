@@ -55,7 +55,7 @@ public class BoardController {
 	}
 	
 	//검색하기
-	@RequestMapping("/search")
+	@RequestMapping("/search.do")
 	public String searchText(BoardVO boardVO, Model model) {
 		
 		model.addAttribute("boardList", boardService.selectFindList(boardVO));

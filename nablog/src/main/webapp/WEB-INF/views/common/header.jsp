@@ -68,16 +68,18 @@
 			<%-- 	<a href="${ pageContext.servletContext.contextPath}/mlogin.do" class="contact">admin</a>  --%>
 			</div>
 				
-			<div class="search">
-				<form action="/search" id="form">
+				<div class="search">
+				<form action="/search.do" id="form">
 				<input type="text" class="input_text" name="search" value=""  placeholder="검색내용을 입력하세요" onfocus="this.placeholder=''" 
 					onblur="this.placeholder='검색내용을 입력하세요'">
 					<input type="hidden" name="menuCateNo" value="${menu.menuCateNo}">
-				<button type="submit" onclick="showText();">
+				<button type="button" onclick="showText();">
 					<img src="resources/images/icons8-search.png" alt="검색">
 				</button>
 				</form>
 
+
+				
 			</div>
 
 		</div>
@@ -88,8 +90,8 @@
 	<script> 
     // 실행 순서 (java-jstl-html-javascript)
 	
-   /*  var statusShow = "";
-    var statusHide = ""; */
+    //메뉴 상태 저장을 위한 전역변수 배열 생성
+   var statusArr = [];
     
 		$(document).ready(function() {
 			//input박스 숨기기
@@ -122,19 +124,36 @@
 							menu.slideDown();
 							
 						} */
-						
-				
+									
+					
 				});
+ 		
+				  //메인페이지 아니라면 저장된 메뉴 상태 정보 적용할 것 
+				/* if (main != 'main') {  */
+				/*	 if(statusArr.length>0){
+						for(int i=0 ; i<statusArr.length ; i++){
+						//	var subhidestatus = $('#sub_hide_' + statusArr[i]);
+						//	console.log(statusArr[i]);
+							document.write(statusArr[i]+"<br>");
+						}
+					} 
+					
+					
+			/* 	}  */
+		
+			
+		
 		/* 	} */
-
+		  
 		});
 		
 		//돋보기 사진 클릭시, 검색 박스 보이기
 		function showText() {
 
 			$("input.input_text").fadeIn();
-			if( (".input_text").val() !=''){
-				$.('#form').submit();
+			 if( $(".input_text").val() !=''){
+				
+				 $('#form').submit();
 			}
 
 		}
@@ -144,28 +163,52 @@
 		
 			var subhide = $('#sub_hide_' + seq);
 
-			// subhide 가 화면상에 보일때는 위로 부드럽게 접고 아니면 아래로 부드럽게 펼치기
+			
 			if (subhide.is(":visible")) {
 
-				subhide.slideUp();
+				subhide.slideUp(); // subhide 가 화면상에 보일때는 위로 부드럽게 접고 아니면 아래로 부드럽게 펼치기
 				$('#img_'+seq).attr("src", "resources/images/icons8-plus.png");
-				/* statusHide = seq ; */
+			//	status =status.replace(seq,""); //해당 seq가 포함되어 있다면 제거
+			//	statusArr.splice(seq-1,1);
+			//	statusArr[seq-1] = 0 ;
+				statusArr = statusArr.filter((element) => element !== seq);
+				console.log("쿠키 status에 저장된 값: "+statusArr);
 
 			} else {
 
 				subhide.slideDown();
 				$('#img_'+seq).attr("src", "resources/images/icons8-minus.png");
-				/* statusShow = seq; */
+				statusArr.push(seq);
+				//	statusArr.splice(seq,0,seq);
+				//	statusArr[seq] = seq ;
+			//	status += seq;
+				console.log("쿠키 status에 저장된 값: "+statusArr);
 			
 			}
 			
 
 		}
 		
-		//쿠기 생성
-		function setCookie("menuStatus", value, 1) {  //변수 , 변수값,저장기간
-		    
-		}
+		//메뉴상태 저장을 위한 쿠키 생성
+		var setCookie = function(name, value, exp) {
+			var date = new Date();
+			date.setTime(date.getTime() + exp*24*60*60*1000);
+			document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+			};
+
+		
+		setCookie("status", status, 1); // setCookie(변수이름, 변수값, 기간);
+		
+		var getCookie = function(name) {
+			var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+			return value? value[2] : null;
+			};
+
+		
+		var status = getCookie("status"); // getCookie(변수이름)
+		console.log("쿠키 status에 저장된 값: "+status);
+
+
 
 
 		

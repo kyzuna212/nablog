@@ -65,7 +65,7 @@ CREATE TABLE BOARD(
     B_ORFILE VARCHAR2(50),
     B_REFILE VARCHAR2(50),
     B_DATE DATE DEFAULT SYSDATE NOT NULL,
-    B_TAG VARCHAR2(15),
+    B_TAG VARCHAR2(95),
     B_VIEW NUMBER,
     RGBD_ID VARCHAR2(20) NOT NULL,
     B_USYN CHAR(1) DEFAULT 'Y'  CHECK ( B_USYN IN ('Y', 'N') ),
@@ -95,7 +95,7 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,''
            ,''
            ,'2020-01-12'
-           ,''
+           ,'샘플,달고나,데이터'
            ,5
            ,'admin11'
            ,'Y'
@@ -109,7 +109,7 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,''
            ,''
            ,'2020-02-12'
-           ,''
+           ,'예수,십자가'
            ,6
            ,'admin11'
            ,'Y'
@@ -123,7 +123,7 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,''
            ,''
            ,'2020-03-11'
-           ,''
+           ,'리뷰어,첫번째,일편단심,입담'
            ,1
            ,'admin11'
            ,'Y'
@@ -139,7 +139,7 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,''
            ,''
            ,'2020-03-19'
-           ,''
+           ,'하룻밤,꿈,안녕,맘'
            ,10
            ,'admin11'
            ,'Y'
@@ -153,7 +153,7 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,''
            ,''
            ,'2020-03-22'
-           ,''
+           ,'아이디어,정국'
            ,7
            ,'admin11'
            ,'Y'
@@ -202,7 +202,7 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,''
            ,''
            ,'2020-05-07'
-           ,''
+           ,'노년,청춘,교향악'
            ,2
            ,'admin11'
            ,'Y'
@@ -216,7 +216,7 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,''
            ,''
            ,'2020-7-12'
-           ,''
+           ,'동력,천고,창공'
            ,4
            ,'admin11'
            ,'Y'
@@ -232,7 +232,7 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,''
            ,''
            ,'2020-7-25'
-           ,''
+           ,'이성,사랑,생명'
            ,9
            ,'admin11'
            ,'Y'
@@ -278,7 +278,27 @@ COMMIT;
 
 --데이터 확인
 SELECT * FROM MEMBER;
---
-SELECT ROWNUM , A.*
-FROM ( SELECT *  FROM BOARD ORDER BY B_VIEW DESC ) A
-WHERE ROWNUM >=1 AND ROWNUM <=5;
+
+
+
+
+--데이터 크기 설정 참고 
+--SELECT LENGTH('테스트') AS koleng,
+--       LENGTH('abc') AS ensoleng,
+--       LENGTH('ABC') AS endaeleng,
+--       LENGTH('123') AS numleng,
+--       LENGTHB('테스트') AS bykoleng,
+--       LENGTHB('abc') AS byensoleng,
+--       LENGTHB('ABC') AS byendaeleng,
+--       LENGTHB('123') AS bynumleng,
+--       LENGTHB(',') AS Ccommaleng
+--    FROM dual;
+--    
+--CREATE TABLE TEST (
+--    KO VARCHAR2(3),
+--    EN VARCHAR2(3)
+--);
+
+--INSERT INTO TEST VALUES('abcd','1234');
+
+--DROP TABLE TEST;
