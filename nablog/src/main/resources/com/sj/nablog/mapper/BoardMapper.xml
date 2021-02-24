@@ -56,5 +56,13 @@
 		 WHERE (b_title = #{search} OR b_cnt = #{search} OR b_tag = #{search})
 		 ORDER BY B_DATE DESC
    	</select>
-    
+   	
+   	<!-- 태그 배열을 가져오기 -->
+	<select id="selectTagList" resultType="String">
+		SELECT
+			  A.B_TAG as bTage
+		FROM 
+			(SELECT B_TAG, B_VIEW FROM BOARD WHERE B_TAG IS NOT NULL ORDER BY B_VIEW DESC ) A
+		
+	</select>    
 </mapper>

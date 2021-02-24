@@ -29,6 +29,7 @@ public class MenuInterceptor extends HandlerInterceptorAdapter{
 		modelAndView.addObject("menuList", menuService.selectList());
 		modelAndView.addObject("recentList", boardService.selectRecent());
 		modelAndView.addObject("popularList", boardService.selectPopluar());
+		modelAndView.addObject("tagList", boardService.selectTagList());
 		
 		super.postHandle(request, response, handler, modelAndView);
 		

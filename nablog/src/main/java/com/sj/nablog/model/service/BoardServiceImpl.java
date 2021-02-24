@@ -38,9 +38,24 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	/*전체 검색한 내용을 가져옵니다*/
+	@Override
 	public ArrayList<BoardVO> selectFindList(BoardVO boardVO) {
 		
 		return boardMapper.selectFindList(boardVO);
+	}
+	
+	/*태그 배열을 가져옵니다*/
+	@Override
+	public String[] selectTagList(){
+		
+		ArrayList<String> taglist = boardMapper.selectTagList();
+		
+		String tagArr[] = new String[taglist.size()] ;
+		for(int i=0; i<taglist.size(); i++) {
+			tagArr[i] = taglist.get(i);
+		}
+
+ 		return tagArr;
 	}
 
 }

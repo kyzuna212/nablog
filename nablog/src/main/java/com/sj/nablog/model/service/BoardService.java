@@ -17,4 +17,7 @@ public interface BoardService {
 
 	/*전체 검색한 내용을 가져옵니다*/
 	public ArrayList<BoardVO> selectFindList(BoardVO boardVO); 
+	
+	/*태그 배열을 가져옵니다*/
+	public String[] selectTagList();
 }

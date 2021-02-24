@@ -27,46 +27,6 @@
 						</a>
 					</li>
 				</c:forEach>
-					<!-- <li>
-						<a href="#">
-					 		<img src="#" alt=""> 
-					 		<span class="title">최근에 쓰여진 글의 제목 첫번째</span> 
-					 		<span class="date">2020.08.13</span>
-						</a>
-					</li>
-
-
-					<li>
-						<a href="#"> 
-							<span class="title">최근에 쓰여진 글의 제목 두번째</span> 
-							<span class="date">2020.05.22</span>
-						</a>
-					</li>
-
-
-					<li>
-						<a href="#"> 
-							<span class="title">최근에 쓰여진 글의 제목 세번째</span> 
-							<span class="date">2020.04.27</span>
-						</a>
-					</li>
-
-
-					<li>
-						<a href="#"> 
-							<img src="#" alt=""> 
-							<span class="title">최근에 쓰여진 글의 제목 네번째</span> 
-							<span class="date">2020.04.22</span>
-						</a>
-					</li>
-
-
-					<li>
-						<a href="#"> 
-							<span class="title">최근에 쓰여진 글의 제목 다섯번째</span> 
-							<span class="date">2020.04.22</span>
-						</a>
-					</li> -->
 
 				</ul>
 			</div>
@@ -83,52 +43,16 @@
 					</li>
 				</c:forEach>
 
-				<!-- 	<li>
-						<a href="#"> 
-							<span class="title">인기글 첫번째 제목</span> 
-							<span class="date">2019.09.17</span>
-						</a>
-					</li>
-
-
-					<li>
-						<a href="#"> 
-							<span class="title">인기글 두번째 제목</span> 
-							<span class="date">2019.11.13</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="#"> 
-							<img src="#" alt=""> 
-							<span class="title">인기글 세번째 제목</span> 
-							<span class="date">2019.08.09</span>
-						</a>
-					</li>
-
-					<li>
-						<a href="#"> 
-							<img src="#" alt=""> 
-							<span class="title">인기글 네번째 제목</span> 
-							<span class="date">2019.09.30</span>
-						</a>
-					</li>
-
-
-					<li>
-						<a href="#"> 
-							<span class="title">인기글 다섯번째 제목</span> 
-							<span class="date">2020.01.01</span>
-						</a>
-					</li>
- -->
 				</ul>
 			</div>
 			<div class="tags">
 				<h2>태그</h2>
 					<div class="tag_a">
-						<a href="#">개발자</a> <a href="#">웹개발</a> <a href="#">스프링</a> <a
-						href="#">java</a> <a href="#">javascript</a>
+						<c:forEach var="tag" items="${tagList}" begin="0" end="5">
+					 	<a href="#">${tag}</a>
+<!-- 						<a href="#">개발자</a> <a href="#">웹개발</a> <a href="#">스프링</a> <a
+						href="#">java</a> <a href="#">javascript</a> -->
+						</c:forEach>
 					</div>
 			</div>
 			</div>

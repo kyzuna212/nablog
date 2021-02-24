@@ -9,6 +9,7 @@
 <c:set var="boardList" value="${boardList}"/>
 <c:set var="recentList" value="${recentList}"/>
 <c:set var="popularList" value="${popularList}"/>
+<c:set var="tagList" value="${tagList}"/>
 
 <!DOCTYPE html>
 <html>
