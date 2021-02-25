@@ -20,4 +20,7 @@ public interface BoardService {
 	
 	/*태그 배열을 가져옵니다*/
 	public String[] selectTagList();
+	
+	/*목록 총 갯수를 조회합니다*/
+	public int selectTotalCount();
 }

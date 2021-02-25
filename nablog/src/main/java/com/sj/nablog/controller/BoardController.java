@@ -33,8 +33,12 @@ public class BoardController {
 	
 	//목록 페이지로 이동
 	@RequestMapping("/list.do")
-	public String movePage(@RequestParam("menuCateNo") int menuCateNo, Model model) {
-	
+	public String movePage(@RequestParam("menuCateNo") int menuCateNo,@RequestParam("pg") int pg, Model model) {
+		if(pg ==1) {
+			
+		};
+		int totalCount = boardService.selectTotalCount();
+		model.addAttribute("pg", pg);
 		model.addAttribute("boardList", boardService.selectList(menuCateNo));
 		model.addAttribute("menu", menuService.selectOne(menuCateNo));
 		

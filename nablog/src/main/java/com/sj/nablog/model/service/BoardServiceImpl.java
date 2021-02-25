@@ -58,4 +58,11 @@ public class BoardServiceImpl implements BoardService {
  		return tagArr;
 	}
 
+	/*목록 총 갯수를 조회합니다*/
+	@Override
+	public int selectTotalCount() {
+		
+		return boardMapper.selectTotalCount();
+	}
+
 }
