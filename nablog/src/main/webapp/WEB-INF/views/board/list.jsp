@@ -49,13 +49,15 @@
 
 
 				<div class="pagination">
-					<a class="prev no-more-prev">이전</a> <a><span class="selected">1</span></a>
-
-					<a href="#"><span>2</span></a> <a href="#"><span>3</span></a>
-
-					<a href="#"><span>4</span></a> <a><span>···</span></a> <a
-						href="#"><span>13</span></a> <a href="#"
-						class="next ">다음</a>
+					<c:if test="${pagingList.prev}">
+						<a class="prev no-more-prev">이전</a> <%-- <a><span class="selected">${pagingList.prev}</span></a> --%>
+					</c:if>
+					<c:forEach var="num"  begin="${page.startPage}" end="${page.endPage}">
+						<a href="#"><span>${num}</span></a> 
+					</c:forEach>
+					<c:if test="${pagingList.next}">	
+						<a href="#" class="next ">다음</a> <%-- <a><span class="selected">${pagingList.next}</span></a> --%>
+					</c:if>
 				 </div>
 
 			</article>

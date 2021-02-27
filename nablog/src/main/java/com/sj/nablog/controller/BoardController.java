@@ -1,15 +1,13 @@
 package com.sj.nablog.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sj.nablog.common.domain.PagingList;
 import com.sj.nablog.model.domain.BoardVO;
-import com.sj.nablog.model.domain.MenuVO;
 import com.sj.nablog.model.service.BoardService;
 import com.sj.nablog.model.service.MenuService;
 
@@ -34,11 +32,8 @@ public class BoardController {
 	//목록 페이지로 이동
 	@RequestMapping("/list.do")
 	public String movePage(@RequestParam("menuCateNo") int menuCateNo,@RequestParam("pg") int pg, Model model) {
-		if(pg ==1) {
-			
-		};
-		int totalCount = boardService.selectTotalCount();
-		model.addAttribute("pg", pg);
+
+		model.addAttribute("pagingList", new PagingList(pg ,boardService.selectTotalCount() ,9 ));
 		model.addAttribute("boardList", boardService.selectList(menuCateNo));
 		model.addAttribute("menu", menuService.selectOne(menuCateNo));
 		

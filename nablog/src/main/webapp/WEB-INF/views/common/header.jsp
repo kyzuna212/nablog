@@ -10,6 +10,7 @@
 <c:set var="recentList" value="${recentList}"/>
 <c:set var="popularList" value="${popularList}"/>
 <c:set var="tagList" value="${tagList}"/>
+<c:set var="pagingList" value="${pagingList}"/>
 
 <!DOCTYPE html>
 <html>
