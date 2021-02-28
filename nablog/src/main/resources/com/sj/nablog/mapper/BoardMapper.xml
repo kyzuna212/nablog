@@ -18,10 +18,19 @@
     </resultMap>
     
     <!-- 목록 총 갯수를 조회합니다 -->
-      <select id="selectTotalCount" resultType="int">
+      <select id="selectTotalCount" resultType="_int">
     	
-    	SELECT COUNT(*) FROM BOARD WHERE MENU_CATE_NO=#{menuCateNo} 
-    
+    		 SELECT COUNT(*)  
+   			 FROM BOARD
+   			 <where> 			
+   			 	<if test="search !=null">			
+			 		b_title LIKE '%' || #{search} || '%' OR b_cnt LIKE '%' || #{search} || '%' OR b_tag LIKE '%' || #{search} || '%'
+			 	</if>
+			 	<if test="menuCateNo !=null">	 
+			  		MENU_CATE_NO =#{menuCateNo}
+			 	</if>
+			  </where>
+   
     </select>
     
      <!-- 메뉴카테고리에 해당하는 글 목록 조회 -->
@@ -58,10 +67,12 @@
    
    	<!-- 전체 검색한 내용을 가져옵니다 -->
    	<select id="selectFindList" resultMap="resultList">
-   		 SELECT *  
+		 
+		 SELECT *  
    		 FROM BOARD 
-		 WHERE (b_title = #{search} OR b_cnt = #{search} OR b_tag = #{search})
+		 WHERE (b_title LIKE '%' || #{search} || '%' OR b_cnt LIKE '%' || #{search} || '%' OR b_tag LIKE '%' || #{search} || '%')
 		 ORDER BY B_DATE DESC
+		 
    	</select>
    	
    	<!-- 태그 배열을 가져오기 -->

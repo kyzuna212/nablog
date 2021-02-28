@@ -31,12 +31,14 @@ public class BoardController {
 	
 	//목록 페이지로 이동
 	@RequestMapping("/list.do")
-	public String movePage(@RequestParam("menuCateNo") int menuCateNo,@RequestParam("pg") int pg, Model model) {
-
-		model.addAttribute("pagingList", new PagingList(pg ,boardService.selectTotalCount() ,9 ));
-		model.addAttribute("boardList", boardService.selectList(menuCateNo));
-		model.addAttribute("menu", menuService.selectOne(menuCateNo));
+	public String movePage(BoardVO boardVO,@RequestParam(value="pg", defaultValue="1") int pg, Model model) {
 		
+		PagingList pagingList = new PagingList(pg ,boardService.selectTotalCount(boardVO) , 9.0f );		
+		model.addAttribute("pagingList", pagingList );
+		model.addAttribute("boardList", boardService.selectList(boardVO.getMenuCateNo()));
+		model.addAttribute("menu", menuService.selectOne(boardVO.getMenuCateNo()));
+		System.out.println(pagingList.toString());
+				
 		return "board/list";
 	}
 	
@@ -53,12 +55,13 @@ public class BoardController {
 		return "board/edit";
 	}
 	
-	//검색하기
+	//전체 검색하기
 	@RequestMapping("/search.do")
-	public String searchText(BoardVO boardVO, Model model) {
+	public String searchText(BoardVO boardVO,@RequestParam(value="pg", defaultValue="1") int pg, Model model) {
 		
+		model.addAttribute("pagingList", new PagingList(pg ,boardService.selectTotalCount(boardVO.getSearch()) ,9.0f ));
 		model.addAttribute("boardList", boardService.selectFindList(boardVO));
-		model.addAttribute("menu", menuService.selectOne(boardVO.getMenuCateNo()));
+	//	model.addAttribute("menu", menuService.selectOne(boardVO.getMenuCateNo()));
 		
 		return "board/list";
 	}

@@ -63,7 +63,7 @@
 .post-item .title { display: block; overflow: hidden; max-width: 98%; margin-bottom: 4px; padding-top: 9px; text-overflow: ellipsis; white-space: nowrap; line-height: 1.4; }
 .post-item .excerpt { overflow: hidden; max-width: 95%; margin-bottom: 15px; text-overflow: ellipsis; font-size: 0.8125em; line-height: 1.5rem; color: #999; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
 .post-item .meta { display: block; font-size: 0.75em; color: #999; }
-.pagination { /* margin-bottom: 60px;  */text-align: center; float:left; margin-left:310px; }
+.pagination { /* margin-bottom: 60px;  */text-align: center; float:left; margin-left:420px; }
 .pagination .prev, .pagination .next { width: 22px; height: 22px; border: 1px solid #eee; border-radius: 50%; background: url(./images/ico_package.png) no-repeat 0 -50px; text-indent: -999em; }
 .pagination a { display: inline-block; margin: 0 12px; font-size: 0.875em; line-height: 1.5rem; vertical-align: top; color: #999; }
 .pagination .selected { color: #333; }

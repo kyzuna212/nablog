@@ -27,33 +27,37 @@
 
 				<div class="post-header">
 					<h1>
-						<span>${menu.menuTit}</span><em>${fn:length(boardList)}</em> 
+						<span>${menu.menuTit eq null ? '전체' : menu.menuTit}</span><em>${fn:length(boardList)}</em> 
 						<a href="${pageContext.servletContext.contextPath}/edit.do">글쓰기</a>
 					</h1>
 				</div>
 				<!-- 한 페이지에 썸네일 9개씩  -->
 		
-				<c:forEach var="board" items="${boardList}" begin="0" end="8" >
+				<c:forEach var="board" items="${boardList}" begin="0" end="${pagingList.pgSize-1}" >
 					<div class="post-item" >
-						<a href="${pageContext.servletContext.contextPath}/detail.do?bno=${board.bno}"> <span class="thum"> <img src="#" alt="">
-
-						</span> 
-						<span class="title">${board.bTitle}</span> 
-						<span class="excerpt">${board.bCnt}</span> 
-						<span class="meta"> 
-						<span class="date">${board.bDate}</span>
-						</span>
+						<a href="${pageContext.servletContext.contextPath}/detail.do?bno=${board.bno}"> 
+							<span class="thum"> 
+								<img src="#" alt="">
+							</span> 
+							<span class="title">${board.bTitle}</span> 
+							<span class="excerpt">${board.bCnt}</span> 
+							<span class="meta"> 
+								<span class="date">${board.bDate}</span>
+							</span>
 						</a>
 					</div>
-					</c:forEach>
+				</c:forEach>
 
 
 				<div class="pagination">
 					<c:if test="${pagingList.prev}">
-						<a class="prev no-more-prev">이전</a> <%-- <a><span class="selected">${pagingList.prev}</span></a> --%>
+						<a class="prev no-more-prev">이전</a>  <a><span class="selected">이전</span></a> 
 					</c:if>
-					<c:forEach var="num"  begin="${page.startPage}" end="${page.endPage}">
-						<a href="#"><span>${num}</span></a> 
+					<c:forEach  varStatus="num"  begin="${pagingList.startPage}" end="${pagingList.endPage}">
+						<a href="#"><span>${num.index}</span></a>
+					<%-- 	<a href="#"><span>${pagingList.startPage}</span></a>
+						<a href="#"><span>${pagingList.endPage}</span></a> --%>
+						 
 					</c:forEach>
 					<c:if test="${pagingList.next}">	
 						<a href="#" class="next ">다음</a> <%-- <a><span class="selected">${pagingList.next}</span></a> --%>
@@ -82,7 +86,10 @@
 		$(".sub_hide_"+statusShow).show();
 	} */
 
-    }); 
+    });
+     function goList(){
+    	// ${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menuCateNo}&pg=${pg}
+     }
     </script>
 
 <!-- 푸터 -->

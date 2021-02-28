@@ -50,19 +50,31 @@ public class BoardServiceImpl implements BoardService {
 		
 		ArrayList<String> taglist = boardMapper.selectTagList();
 		
-		String tagArr[] = new String[taglist.size()] ;
+		String str ="";
+		
 		for(int i=0; i<taglist.size(); i++) {
-			tagArr[i] = taglist.get(i);
+			
+			str += taglist.get(i)+",";
+			
 		}
+		
+		String tagArr[] = str.split(",");
 
  		return tagArr;
 	}
 
-	/*목록 총 갯수를 조회합니다*/
+	/*카테고리 별 목록 총 갯수를 조회합니다*/
 	@Override
-	public int selectTotalCount() {
+	public int selectTotalCount(BoardVO boardVO) {
 		
-		return boardMapper.selectTotalCount();
+		return boardMapper.selectTotalCount(boardVO);
+	}
+
+	/*전체 카테고리에서 검색한  목록 총 갯수를 조회합니다*/
+	@Override
+	public int selectTotalCount(String search) {
+		
+		return boardMapper.selectTotalCount(search);
 	}
 
 }

@@ -11,6 +11,8 @@
 <c:set var="popularList" value="${popularList}"/>
 <c:set var="tagList" value="${tagList}"/>
 <c:set var="pagingList" value="${pagingList}"/>
+<c:set var="pg" value="${pg}"/>
+<c:set var="menuCateNo" value="${menuCateNo}"/>
 
 <!DOCTYPE html>
 <html>
@@ -32,7 +34,7 @@
 					<c:forEach var="no" items="${menuMainList}" varStatus="index">
 
 						<li>
-							<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${no.menuCateNo}">${no.menuTit}(10)</a>
+							<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${no.menuCateNo}&pg=1">${no.menuTit}(10)</a>
 							<img src="resources/images/icons8-plus.png" id="img_${index.index+1}" onclick="showSubHide(${index.index+1});">
 							
 							<ul class="sub_hide" id="sub_hide_${index.index+1}">
@@ -40,7 +42,7 @@
 									
 									<c:if test="${subno.menuCateRef eq no.menuCateNo }">
 										<li class="${subno.menuCateNo}">
-											<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${subno.menuCateNo}">${subno.menuTit}(7)</a>
+											<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${subno.menuCateNo}&pg=1">${subno.menuTit}(7)</a>
 										</li>
 									</c:if>
 								
@@ -64,17 +66,18 @@
 			</div>
 
 			<div class="right_menubar">
-				<a href="${ pageContext.servletContext.contextPath}/about.do"
+				<a href="${pageContext.servletContext.contextPath}/about.do"
 					class="about">about me</a>
 
 			<%-- 	<a href="${ pageContext.servletContext.contextPath}/mlogin.do" class="contact">admin</a>  --%>
 			</div>
 				
 				<div class="search">
-				<form action="/search.do" id="form">
+				<form action="${pageContext.servletContext.contextPath}/search.do?" id="form">
 				<input type="text" class="input_text" name="search" value=""  placeholder="검색내용을 입력하세요" onfocus="this.placeholder=''" 
 					onblur="this.placeholder='검색내용을 입력하세요'">
 					<input type="hidden" name="menuCateNo" value="${menu.menuCateNo}">
+					<input type="hidden" name="pg" value="1">
 				<button type="button" onclick="showText();">
 					<img src="resources/images/icons8-search.png" alt="검색">
 				</button>
@@ -173,7 +176,7 @@
 			//	status =status.replace(seq,""); //해당 seq가 포함되어 있다면 제거
 			//	statusArr.splice(seq-1,1);
 			//	statusArr[seq-1] = 0 ;
-				statusArr = statusArr.filter((element) => element !== seq);
+				statusArr = statusArr.filter((element) = element !== seq);
 				console.log("쿠키 status에 저장된 값: "+statusArr);
 
 			} else {
@@ -210,7 +213,11 @@
 		var status = getCookie("status"); // getCookie(변수이름)
 		console.log("쿠키 status에 저장된 값: "+status);
 
-
+		
+		//해당 목록 페이지로 이동
+		function goList(){
+			
+		}
 
 
 		

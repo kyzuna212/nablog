@@ -25,7 +25,10 @@ public interface BoardMapper {
 	/*태그 배열을가져옵니다*/
 	public ArrayList<String> selectTagList();
 
-	/*목록 총 갯수를 조회합니다*/
-	public int selectTotalCount();
+	/*카테고리 별 목록 총 갯수를 조회합니다*/
+	public int selectTotalCount(BoardVO boardVO);
+
+	/*전체 카테고리에서 검색한  목록 총 갯수를 조회합니다*/
+	public int selectTotalCount(String search);
 
 }

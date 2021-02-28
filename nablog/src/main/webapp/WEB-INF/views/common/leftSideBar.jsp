@@ -50,8 +50,6 @@
 					<div class="tag_a">
 						<c:forEach var="tag" items="${tagList}" begin="0" end="5">
 					 	<a href="#">${tag}</a>
-<!-- 						<a href="#">개발자</a> <a href="#">웹개발</a> <a href="#">스프링</a> <a
-						href="#">java</a> <a href="#">javascript</a> -->
 						</c:forEach>
 					</div>
 			</div>

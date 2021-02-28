@@ -99,14 +99,15 @@ public class BoardVO {
 	public void setSearch(String search) {
 		this.search = search;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", menuCateNo=" + menuCateNo + ", bTitle=" + bTitle + ", bCnt=" + bCnt
 				+ ", bOrfile=" + bOrfile + ", bRefile=" + bRefile + ", bDate=" + bDate + ", bTage=" + bTage + ", bView="
-				+ bView + ", rgbdId=" + rgbdId + ", bUsyn=" + bUsyn + "]";
+				+ bView + ", rgbdId=" + rgbdId + ", bUsyn=" + bUsyn + ", search=" + search + "]";
 	}
 	
+
 	
 	
 	
