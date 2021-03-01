@@ -14,7 +14,7 @@
 <!-- 헤더 -->
 <c:import url="/WEB-INF/views/common/header.jsp" /> 
 
-<script type="text/javascript" src="../../resources/editor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../resources/editor/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
 <div id="all_wrap">
@@ -40,7 +40,7 @@
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
 			elPlaceHolder : "ir1",  //textarea ID
-			sSkinURI : "../../resources/editor/SmartEditor2Skin.html", //skin경로
+			sSkinURI : "../../resources/editor/dist/SmartEditor2Skin.html", //skin경로
 			fCreator : "createSEditor2"
 		});
 			
@@ -56,6 +56,7 @@
 		     elClickedObj.form.submit();
 		 } catch(e) {}
 
+		}
 	});
 	
 
