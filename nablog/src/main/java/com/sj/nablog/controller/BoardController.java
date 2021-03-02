@@ -37,7 +37,7 @@ public class BoardController {
 		model.addAttribute("pagingList", pagingList );
 		model.addAttribute("boardList", boardService.selectList(boardVO.getMenuCateNo()));
 		model.addAttribute("menu", menuService.selectOne(boardVO.getMenuCateNo()));
-		System.out.println(pagingList.toString());
+	//	System.out.println(pagingList.toString());
 				
 		return "board/list";
 	}
