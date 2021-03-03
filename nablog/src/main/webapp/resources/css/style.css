@@ -158,7 +158,8 @@ input[type="password" i] { -webkit-text-security: disc !important; }
 .loginBtn{}
 
 /*editor*/
-iframe {margin-top:-180px; height:1000px; margin:auto;}
+iframe {margin-top: -180px; margin-left: 100px;}
+#editor {margin-top:-180px;  height: 500px; margin: auto; width: 725px; margin-left: 100px;}
 
 
 /* 공통  디자인  */

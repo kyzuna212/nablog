@@ -24,7 +24,24 @@
 
 		<!-- 콘텐츠 -->
 		<div id="mainbody">
-			<textarea name="ir1" id="ir1" rows="10" cols="100" style="margin-top:-180px;">에디터에 기본으로 삽입할 글(수정 모드)이 없다면 이 value 값을 지정하지 않으시면 됩니다.</textarea>
+			<form id="inputForm" action="/insert.do" method="post">
+				<label for="menuCateNo" >카테고리 *</label>
+				<select name="menuCateNo" id="menuCateNo">
+					<c:forEach var="no" items="${menuList}" varStatus="index">
+						<option value="${no.menuCateNo}" ${no.menuCateNo==menu.menuCateNo ? 'selected=selected' :''}  >${no.menuTit}</option>
+					</c:forEach>
+				</select>
+				
+				<label for="bTitle" >제목 *</label>
+				<input type="text" id="bTitle" name="bTitle" placeholder="제목을 입력해주세요" required>
+				
+
+				<textarea name="bCnt" id="editor" rows="10" cols="100" ></textarea>
+				<label for="editor" >첨부파일</label>
+				<input type="file" id="bOrfile" name="bOrfile">
+				<label for="editor" >태그</label>
+				<input type="text" id="bTage" name="bTage">
+			</form>
 		</div>
 </div>
 
@@ -34,7 +51,7 @@
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef : oEditors,
-		elPlaceHolder : "ir1",  //textarea ID
+		elPlaceHolder : "editor",  //textarea ID
 		sSkinURI : "resources/editor/dist/SmartEditor2Skin.html", //skin경로
 		fCreator : "createSEditor2",
 		htParams : { 
@@ -54,10 +71,10 @@
 	// ‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
 	function submitContents(elClickedObj) {
 	 // 에디터의 내용이 textarea에 적용된다.
-	 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+	 oEditors.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
 	
 	 // 에디터의 내용에 대한 값 검증은 이곳에서
-	 // document.getElementById("ir1").value를 이용해서 처리한다.
+	 // document.getElementById("editor").value를 이용해서 처리한다.
 	
 	 try {
 	     elClickedObj.form.submit();

@@ -51,7 +51,8 @@ public class BoardController {
 	
 	//글쓰기 페이지로 이동
 	@RequestMapping("/edit.do")
-	public String moveEditPage(Model model) {
+	public String moveEditPage(@RequestParam("menuCateNo") int menuCateNo,Model model) {
+		model.addAttribute("menu", menuService.selectOne(menuCateNo));
 		return "board/edit";
 	}
 	

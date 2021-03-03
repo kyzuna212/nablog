@@ -28,7 +28,7 @@
 				<div class="post-header">
 					<h1>
 						<span>${menu.menuTit eq null ? '전체' : menu.menuTit}</span><em>${fn:length(boardList)}</em> 
-						<a href="${pageContext.servletContext.contextPath}/edit.do">글쓰기</a>
+						<a href="${pageContext.servletContext.contextPath}/edit.do?menuCateNo=${menu.menuCateNo eq null ? 1 :menu.menuCateNo}">글쓰기</a>
 					</h1>
 				</div>
 				<!-- 한 페이지에 썸네일 9개씩  -->
@@ -88,11 +88,11 @@
     	$(".hide").show(); 
     	$(".left_side_bar").show();
     	
-    	for(int i=0; i<statusArr.size(); i++){
+    	/* for(int i=0; i<statusArr.size(); i++){ */
     		
-    		$('#sub_hide_' + statusArr[i]).show();
+    	/*	$('#sub_hide_' + statusArr[i]).show();
     	}
-
+ */
     });
   /*    function goList(pg){
     	 ${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menuCateNo}&pg=pg
