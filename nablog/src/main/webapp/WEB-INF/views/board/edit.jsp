@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>나츠키's 블로그</title>
 
 <!-- 디자인  -->
@@ -37,8 +37,11 @@
 				
 
 				<textarea name="bCnt" id="editor" rows="10" cols="100" ></textarea>
+				
 				<label for="editor" >첨부파일</label>
-				<input type="file" id="bOrfile" name="bOrfile">
+				<input type="file" id="bOrfile" name="uploadFile" multiple>
+				<button id="uploadBtn">Upload</button>
+				
 				<label for="editor" >태그</label>
 				<input type="text" id="bTage" name="bTage">
 			</form>
@@ -87,6 +90,36 @@
 		$(".sub_hide").show();
 		$(".hide").show();
 		$(".left_side_bar").show();
+		
+		//파일 업로드 
+		$('#uploadBtn').on("click", function(e){
+			
+			//FormData라는 객체를 활용하여 필요한 파라미터를 담아 전송
+			//브라우저 제한 있음
+			var formData = new FormData();
+			
+			var inputFile = $("input[name='uploadFile']");
+			
+			var files = inputFile[0].files;
+			
+			//file 데이터를 formData에 넣기
+			for(var i=0; i<files.length; i++){
+				
+				formData.append("uploadFile",files[i]);
+			}
+			
+			$.ajax({
+				
+				url : 'upload.do',
+				processData : false,
+				contentType : false,
+				data : formData,
+				type: 'POST',
+				success: function(result){
+					alert("첨부파일이 등록 되었습니다");
+				}
+			})
+		});
 		
 		
 	});

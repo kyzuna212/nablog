@@ -1,10 +1,14 @@
 package com.sj.nablog.controller;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sj.nablog.common.domain.PagingList;
 import com.sj.nablog.model.domain.BoardVO;
@@ -65,5 +69,31 @@ public class BoardController {
 	//	model.addAttribute("menu", menuService.selectOne(boardVO.getMenuCateNo()));
 		
 		return "board/list";
+	}
+	
+	//파일 업로드
+	@PostMapping("/upload.do")
+	public void uploadAjaxFile(MultipartFile[] uploadFile) {
+		
+		String uploadFolder = "C:\\upload";
+		
+		for(MultipartFile multipartFile : uploadFile) {
+			
+			String uploadFileName = multipartFile.getOriginalFilename(); 
+			
+			//IE는 file path를 가지고 있음
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
+			
+			//uploadFolder 폴더 경로의 uploadFileName라는 파일에 대한 File 객체를 생성
+			File saveFile = new File (uploadFolder, uploadFileName);
+			
+			try {
+				//multipartFile의 메서드 transferTo(File file) : 파일의 저장
+				multipartFile.transferTo(saveFile);
+			}catch(Exception e) {
+				e.getMessage();
+			}		
+			
+		}
 	}
 }
