@@ -1,6 +1,8 @@
 package com.sj.nablog.model.domain;
 
+import java.io.File;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 //import lombok.Data;
 
@@ -105,6 +107,18 @@ public class BoardVO {
 		return "BoardVO [bno=" + bno + ", menuCateNo=" + menuCateNo + ", bTitle=" + bTitle + ", bCnt=" + bCnt
 				+ ", bOrfile=" + bOrfile + ", bRefile=" + bRefile + ", bDate=" + bDate + ", bTage=" + bTage + ", bView="
 				+ bView + ", rgbdId=" + rgbdId + ", bUsyn=" + bUsyn + ", search=" + search + "]";
+	}
+	
+	//오늘 날짜의 경로를 문자열로 생성
+	public static String  getFolder() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		//Date date = new Date();
+		
+		String str = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+		
+		return str.replace("-", File.separator);
 	}
 	
 

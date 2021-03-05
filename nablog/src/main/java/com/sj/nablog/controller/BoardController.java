@@ -1,6 +1,8 @@
 package com.sj.nablog.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,18 @@ public class BoardController {
 	
 	@Setter(onMethod_ = {@Autowired})
 	private BoardService boardService;
+	
+	//오늘 날짜의 경로를 문자열로 생성 (폴더 저장을 날짜별로 분류하기 위함)
+	private  String  getFolder() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		//Date date = new Date();
+		
+		String str = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+		
+		return str.replace("-", File.separator);
+	}
 	
 	//목록 페이지로 이동
 	@RequestMapping("/list.do")
@@ -77,6 +91,14 @@ public class BoardController {
 		
 		String uploadFolder = "C:\\upload";
 		
+		//폴더 만들기
+		File uploadPath = new File(uploadFolder, getFolder());
+		
+		//yyyy/MM/dd  폴더를 만들기
+		if(uploadPath.exists() ==false) {
+			uploadPath.mkdirs();
+		}
+		
 		for(MultipartFile multipartFile : uploadFile) {
 			
 			String uploadFileName = multipartFile.getOriginalFilename(); 
@@ -84,8 +106,16 @@ public class BoardController {
 			//IE는 file path를 가지고 있음
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\")+1);
 			
+			//파일 이름 중복으로 인한 삭제 방지를 위한 임의의 값 생성
+			UUID uuid = UUID.randomUUID();
+			//원래 파일 이름과의 구분위해 _를 추가
+			uploadFileName = uuid.toString() + "_" +uploadFileName ;
+			
 			//uploadFolder 폴더 경로의 uploadFileName라는 파일에 대한 File 객체를 생성
-			File saveFile = new File (uploadFolder, uploadFileName);
+			//File saveFile = new File (uploadFolder, uploadFileName);
+			
+			//날짜별로 폴더 지정해서 날짜별로 저장
+			File saveFile = new File (uploadPath, uploadFileName);
 			
 			try {
 				//multipartFile의 메서드 transferTo(File file) : 파일의 저장
