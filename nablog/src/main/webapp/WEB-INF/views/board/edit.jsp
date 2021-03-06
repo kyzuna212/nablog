@@ -137,10 +137,12 @@
 				processData : false,
 				contentType : false,
 				data : formData,
-				type: 'POST',
-				success: function(result){
-					alert("첨부파일이 등록 되었습니다");
-				}
+					type: 'POST',
+					dataType : json,
+					success: function(result){
+						console.log(result);
+						//alert("첨부파일이 등록 되었습니다");
+					}
 			})
 		});
 		
