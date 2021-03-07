@@ -37,10 +37,17 @@
 				
 
 				<textarea name="bCnt" id="editor" rows="10" cols="100" ></textarea>
-				
-				<label for="editor" >첨부파일</label>
-				<input type="file" id="bOrfile" name="uploadFile" multiple>
-				<button id="uploadBtn">Upload</button>
+				<div class="uploadDiv">
+					<label for="editor" >첨부파일</label>
+					<input type="file" id="bOrfile" name="uploadFile" multiple> <!-- input type='file'은 readonly -->
+					<button id="uploadBtn">Upload</button>
+				</div>
+				<!-- ul태그 내에 업로드된 파일의 이름을 보여주기 -->
+				<div class="uploadResult">
+					<ul>
+					
+					</ul>
+				</div>
 				
 				<label for="editor" >태그</label>
 				<input type="text" id="bTage" name="bTage">
@@ -84,6 +91,35 @@
 	 } catch(e) {}
 	
 	}
+
+	//파일 이름 출력
+	var uploadResult = $(".uploadResult ul");
+	
+	function showUploadedFile(uploadResultArr){
+		
+		var str ="";
+		
+		$(uploadResultArr).each(function(i,obj) {
+			
+			if(!obj.image){ //이미지 파일이 아닐경우 일반 첨부파일 이미지
+				
+				str += "<li><img src='/resources/images/icons8-file.png'>" +obj.fileName + "</li>";
+				
+			}else{ //이미지 파일일 경우 썸네일 이미지
+				
+				//str += "<li><img src='/resources/images/icons8-image-file.png'>" +obj.fileName + "</li>";
+				
+				//서버에서 섬네일을 GET방식을 통해 가져올 수 있도록 함 (URI뒤에 파일 이름 추가)
+				//(한글 혹은 공백이 들어가면 문제 발생 가능-자바스크립트의 encodeURIComponent()함수를 이용해서  URI에 문제없는 문자열 생성해서 처리
+				var fileCallPath = encodeURIComponent(obj.uploadPath+"\s_"+obj.uuid+obj.fileName);
+				
+				str += "<li><img src='/display.do?fileName="+fileCallPath+"'></li>";
+				
+			}
+			
+		});
+				uploadResult.append(str);
+	}
 	
 	//exe,sh,zip,alz 확장자 제외시키기
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -109,6 +145,8 @@
 		$(".sub_hide").show();
 		$(".hide").show();
 		$(".left_side_bar").show();
+		
+		var cloneObj = $(".uploadDiv").clone();
 		
 		//파일 업로드 
 		$('#uploadBtn').on("click", function(e){
@@ -142,6 +180,12 @@
 					success: function(result){
 						console.log(result);
 						//alert("첨부파일이 등록 되었습니다");
+						
+						//파일 이름 출력
+						showUploadedFile(result);
+						
+						//첨부파일 추가하고 버튼을 클릭하면 첨부파일 초기화
+						$(".uploadDiv").html(cloneObj.html());
 					}
 			})
 		});

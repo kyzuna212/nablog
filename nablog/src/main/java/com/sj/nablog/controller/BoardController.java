@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -164,6 +167,30 @@ public class BoardController {
 		}//for end
 		
 		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+		
+	//서버에 전송하는 데이터는 파일의 경로 + _s+uuid가 붙은 파일 이름
+	//문자열로 파일의 경로가 포함된 fileName을 파라미터로 받고 byte[]를 전송
+	@GetMapping("/display.do")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFile(String fileName){
+		
+		File file = new File("c:\\upload\\"+fileName);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			HttpHeaders header = new HttpHeaders();
+			//byte[]로 이미지 파일 전송시 브라우저에 보내주는 MIME타입이 파일의 종류에 따라 달라질 수 있음 ->probeContentType()를 이용하여 해결
+			header.add("Content-Type", Files.probeContentType(file.toPath())); 
+
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 	
 	//오늘 날짜의 경로를 문자열로 생성 (폴더 저장을 날짜별로 분류하기 위함)
