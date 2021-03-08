@@ -3,6 +3,8 @@ package com.sj.nablog.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -191,6 +196,55 @@ public class BoardController {
 		}
 		
 		return result;
+	}
+	//크롬에서는 가능(자동으로 해당 파일을 다운로드), IE에서는 불가능(Content-Disposition의 값을 처리하는 인코딩 방식이 다름),Edge는 또 다름
+	//MIME 타입은 다운로드 할 수 있는 application/octet-stream으로 지정
+	//HttpServletRequest의 User-Agent의 값 (헤더 메시지 중에서 디바이스 정보를 알 수 있는 헤더) 이용
+	@GetMapping(value="/download.do" , produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public ResponseEntity<Resource> downloadFile(@RequestHeader("User-Agent") String userAgent, String fileName){
+		
+		Resource resource = new FileSystemResource("c:\\upload\\"+fileName);
+		
+		if(resource.exists() == false) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		String resourceName = resource.getFilename();
+		
+		//UUID제거 한 상태의 파일 이름으로 저장
+		String resourceOriginalName = resourceName.substring(resourceName.indexOf("_")+1);
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		try {
+			
+			String downloadName = null;
+			
+			//IE
+			if(userAgent.contains("Trident")) {
+				
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8").replaceAll("\\", " ");
+			
+			//Edge
+			}else if(userAgent.contains("Edge")) {
+				
+				downloadName = URLEncoder.encode(resourceOriginalName, "UTF-8");
+			
+			//Chrome
+			}else {
+				
+				downloadName = new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1");
+			}
+			//다운로드 시 저장되는 이름은  Content-Disposition를 이용해서 지정
+			//파일이름에 대한 문자열 처리 -한글일 경우 저장할 때 깨지는 문제 방지
+			headers.add("Content-Disposition", "attachment; filename="+ downloadName); 
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
 	
 	//오늘 날짜의 경로를 문자열로 생성 (폴더 저장을 날짜별로 분류하기 위함)

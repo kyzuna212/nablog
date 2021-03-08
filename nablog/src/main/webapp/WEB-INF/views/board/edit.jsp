@@ -103,7 +103,9 @@
 			
 			if(!obj.image){ //이미지 파일이 아닐경우 일반 첨부파일 이미지
 				
-				str += "<li><img src='/resources/images/icons8-file.png'>" +obj.fileName + "</li>";
+				var fileCallPath = encodeURIComponent(obj.uploadPath+"\s_"+obj.uuid+obj.fileName);
+			
+				str += "<li><a href='/download?fileName="+fileCallPath+"'>"+"<img src='/resources/images/icons8-file.png'>" +obj.fileName + "</a></li>";
 				
 			}else{ //이미지 파일일 경우 썸네일 이미지
 				
