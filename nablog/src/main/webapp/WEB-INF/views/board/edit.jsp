@@ -51,6 +51,12 @@
 				
 				<label for="editor" >태그</label>
 				<input type="text" id="bTage" name="bTage">
+				
+				<!-- 썸네일 클릭시 보여지는 원본이미지  -->
+				<div class="bigPictureWrapper">
+					<div class="bigPicture">
+					</div>
+				</div>
 			</form>
 		</div>
 </div>
@@ -92,6 +98,31 @@
 	
 	}
 
+	//썸네일 이미지 클릭시 원본 이미지를 보여줌
+	function showImage(fileCallPath){
+		//alert(fileCallPath);
+		//가운데 배치
+		$(.bigPictureWrapper).css("display", "flex").show();
+		
+		//지정된 시간 동안 화면에서 원본 이미지 출력
+		$(".bigPicture").html("<img src='display.do?fileName="encodeURI(fileCallPath)+"'>").animate({width:'100%', height: '100%'}, 1000);
+	}
+	
+	//원본 이미지를 클릭하면 사라짐
+	$(".bigPictureWrapper").on("click", function(e){
+		
+		$(".bigPicture").animate({width:'0%', height:'0%'}, 1000);
+		//ES6의 화살표 함수는 크롬에서는 정상 작동 IE11에서는 작동 하지 않음
+		setTimeout(() => {
+			$(this).hide();
+		}, 1000);
+		
+		//IE11용
+/* 		setTimeout(function(){
+			$('.bigPictureWrapper').hide();
+		}, 1000); */
+	});
+	
 	//파일 이름 출력
 	var uploadResult = $(".uploadResult ul");
 	
@@ -105,7 +136,7 @@
 				
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"\s_"+obj.uuid+obj.fileName);
 			
-				str += "<li><a href='/download?fileName="+fileCallPath+"'>"+"<img src='/resources/images/icons8-file.png'>" +obj.fileName + "</a></li>";
+				str += "<li><a href='/download?fileName="+fileCallPath+"'><img src='/resources/images/icons8-file.png'>" +obj.fileName + "</a></li>";
 				
 			}else{ //이미지 파일일 경우 썸네일 이미지
 				
@@ -115,7 +146,13 @@
 				//(한글 혹은 공백이 들어가면 문제 발생 가능-자바스크립트의 encodeURIComponent()함수를 이용해서  URI에 문제없는 문자열 생성해서 처리
 				var fileCallPath = encodeURIComponent(obj.uploadPath+"\s_"+obj.uuid+obj.fileName);
 				
-				str += "<li><img src='/display.do?fileName="+fileCallPath+"'></li>";
+				//원본 이미지 이름은 썸네일의 \s_가 \로 변경
+				var originPath = obj.uploadPath +"\\"+obj.uuid + "_" +obj.fileName;
+				
+				// '\'기호의 경우 일반 문자열과 다르게 처리되므로 '/'로 변환한 후 처리
+				originPath = originPath.replace(new RegExp(/\\/g), "/");
+				
+				str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display.do?fileName="+fileCallPath+"'></a></li>";
 				
 			}
 			
