@@ -97,12 +97,31 @@
 	 } catch(e) {}
 	
 	}
+	
+	//exe,sh,zip,alz 확장자 제외시키기
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	//파일 사이즈 제한
+	var maxSize = 5242880; //5MB
+	
+	function checkExtension(fileName, fileSize){
+		
+		if(fileSize >=maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		
+		if(regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
 
 	//썸네일 이미지 클릭시 원본 이미지를 보여줌
 	function showImage(fileCallPath){
 		//alert(fileCallPath);
 		//가운데 배치
-		$(.bigPictureWrapper).css("display", "flex").show();
+		$(".bigPictureWrapper").css("display", "flex").show();
 		
 		//지정된 시간 동안 화면에서 원본 이미지 출력
 		$(".bigPicture").html("<img src='display.do?fileName="encodeURI(fileCallPath)+"'>").animate({width:'100%', height: '100%'}, 1000);
@@ -126,6 +145,7 @@
 	//파일 이름 출력
 	var uploadResult = $(".uploadResult ul");
 	
+	//파일 업로드시 보여지는 부분
 	function showUploadedFile(uploadResultArr){
 		
 		var str ="";
@@ -134,9 +154,12 @@
 			
 			if(!obj.image){ //이미지 파일이 아닐경우 일반 첨부파일 이미지
 				
-				var fileCallPath = encodeURIComponent(obj.uploadPath+"\s_"+obj.uuid+obj.fileName);
+				var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+obj.fileName);
 			
-				str += "<li><a href='/download?fileName="+fileCallPath+"'><img src='/resources/images/icons8-file.png'>" +obj.fileName + "</a></li>";
+				var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+			
+				str += "<li><div><a href='/download.do?fileName="+fileCallPath+"'><img src='/resources/images/icons8-file.png'>" +obj.fileName + "</a>"
+						+"<span data-file=\'"+fileCallPath+"\' data-type='file'> x </span></div></li>";
 				
 			}else{ //이미지 파일일 경우 썸네일 이미지
 				
@@ -152,7 +175,8 @@
 				// '\'기호의 경우 일반 문자열과 다르게 처리되므로 '/'로 변환한 후 처리
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
 				
-				str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display.do?fileName="+fileCallPath+"'></a></li>";
+				str += "<li><a href=\"javascript:showImage(\'"+originPath+"\')\"><img src='/display.do?fileName="+fileCallPath+"'></a>"
+						+"<span data-file=\'"+fileCallPath"\' data-type='image'> x </span></li>";
 				
 			}
 			
@@ -160,24 +184,26 @@
 				uploadResult.append(str);
 	}
 	
-	//exe,sh,zip,alz 확장자 제외시키기
-	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	//파일 사이즈 제한
-	var maxSize = 5242880; //5MB
-	
-	function checkExtension(fileName, fileSize){
+	//x 버튼 눌렀을 때 첨부파일 삭제
+	$.(".uploadResult").on("click", "span", function(e){
 		
-		if(fileSize >=maxSize){
-			alert("파일 사이즈 초과");
-			return false;
-		}
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		console.log(targetFile);
 		
-		if(regex.test(fileName)){
-			alert("해당 종류의 파일은 업로드할 수 없습니다.");
-			return false;
-		}
-		return true;
-	}
+		//첨부파일의 경로와 이름, 파일의 종류(이미지 혹은 일반) 정보 전송
+ 		$.ajax({
+			url : '/deleteFile.do',
+			data : {fileName : targetFile , type : type},
+			dataType : 'text',
+			type : 'POST',
+				success : function(result){
+					alert(result);
+				}
+			
+		});
+	});
+
 
 	$(document).ready(function() {
 		//main페이지를 제외한 나머지 페이지에서는 목록을 항상 보이게 한다

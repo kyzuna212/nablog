@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -47,6 +50,8 @@ import net.coobird.thumbnailator.Thumbnailator;
 @AllArgsConstructor  //생성자를 만들고 자동으로 주입(BoardService에 의존적)
 					//단, 생성자를 만들지 않을 경우 @Setter(onMethod_={@Autowired})를 이용하여 처리
 public class BoardController {
+	
+	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
 	
 	@Setter(onMethod_ = {@Autowired})
 	private MenuService menuService ;
@@ -245,6 +250,41 @@ public class BoardController {
 		}
 		
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	}
+	
+	//첨부파일 삭제
+	@PostMapping("/deleteFile.do")
+	@ResponseBody
+	public ResponseEntity<String> deleteFile(String fileName, String type){
+		
+		log.info("deleteFile: "+ fileName);
+		
+		File file;
+		
+		try {
+			//일반 파일, 썸네일 이미지 파일 삭제
+			file = new File("c:\\upload\\"+URLDecoder.decode(fileName, "UTF-8"));
+			
+			file.delete();
+			
+			//이미지 파일의 경우 's_'을 제외한 경로에 저장되어 있는 원본 이미지 파일도 같이 삭제함
+			if(type.equals("image")) {
+				
+				String largeFileName = file.getAbsolutePath().replace("s_", "");
+				
+				log.info("largeFileName : "+ largeFileName);
+				
+				file = new File(largeFileName);
+				
+				file.delete();
+			}
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
 	
 	//오늘 날짜의 경로를 문자열로 생성 (폴더 저장을 날짜별로 분류하기 위함)
