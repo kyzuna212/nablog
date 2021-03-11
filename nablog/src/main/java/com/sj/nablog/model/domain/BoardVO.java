@@ -1,6 +1,8 @@
 package com.sj.nablog.model.domain;
 
 import java.sql.Date;
+import java.util.List;
+
 import com.sj.nablog.common.domain.AttachFile;
 
 import lombok.Data;
@@ -9,7 +11,7 @@ import lombok.Data;
 
 //게시판
 @Data
-public class BoardVO extends AttachFile{
+public class BoardVO {
 	
 	/*컬럼*/
 	private int bno; 	//게시글 번호
@@ -23,6 +25,9 @@ public class BoardVO extends AttachFile{
 	private int bView;	//게시글 조회수
 	private String rgbdId;	//게시글 작성자
 	private String bUsyn;	//게시글 사용여부 (Y:사용, N:삭제)
+	
+	//첨부파일 등록
+	private List<AttachFile> attachList ;
 	
 	/*검색*/
 	private String search; //검색
