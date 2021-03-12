@@ -37,7 +37,7 @@
 				
 
 				<textarea name="bCnt" id="editor" rows="10" cols="100" ></textarea>
-				<div class="uploadDiv">
+				<div class="form-group uploadDiv">
 					<label for="editor" >첨부파일</label>
 					<input type="file" id="bOrfile" name="uploadFile" multiple> <!-- input type='file'은 readonly -->
 					<button id="uploadBtn">Upload</button>
@@ -116,6 +116,7 @@
 		}
 		return true;
 	}
+	
 
 	//썸네일 이미지 클릭시 원본 이미지를 보여줌
 	function showImage(fileCallPath){
@@ -212,9 +213,9 @@
 		$(".left_side_bar").show();
 		
 		var cloneObj = $(".uploadDiv").clone();
-		
-		//파일 업로드 
-		$('#uploadBtn').on("click", function(e){
+				
+		//input type='file'의 내용이 변경되는 것을 감지하여 파일 업로드 처리
+		$("input[type='file']").change(function(e){
 			
 			//FormData라는 객체를 활용하여 필요한 파라미터를 담아 전송
 			//브라우저 제한 있음
@@ -246,14 +247,68 @@
 						console.log(result);
 						//alert("첨부파일이 등록 되었습니다");
 						
-						//파일 이름 출력
-						showUploadedFile(result);
+						//파일 이름 출력 -업로드 결과 처리 함수
+						showUploadedFile(result); 
 						
 						//첨부파일 추가하고 버튼을 클릭하면 첨부파일 초기화
-						$(".uploadDiv").html(cloneObj.html());
+					//	$(".uploadDiv").html(cloneObj.html());
 					}
 			})
 		});
+		
+		//업로드 된 결과를 화면에 썸네일 등을 만들어서 처리
+		//Ajax 호출 후에 업로드된 결과를 처리하는 함수
+		function showUploadResult(uploadResultArr){
+			
+			if(!uploadResultArr || uploadResultArr.length ==0){
+				return;
+			}
+			
+			var uploadUL = $(".uploadResult ul");
+			
+			var str="";
+			
+			$(uploadResultArr).each(function(i, obj){
+				
+				//image type
+				if(obj.image){
+					
+					var fileCallPath = encodeURIComponent( obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
+					
+					str += "<li><div>";
+					str += "<span>"+obj.fileName+"</span>";
+					str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "<img src='/display.do?fileName="+fileCallPath"'>";
+					str += "</div>";
+					str + "</li>";
+					
+				}else{
+					
+					var fileCallPath = encodeURIComponent( obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+					
+					var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+					
+					str += "<li><div>";
+					str += "<span>"+obj.fileName+"</span>";
+					str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "<img src='/resources/images/icons8-file.png'>";
+					str += "</div>";
+					str + "</li>";
+				}
+			});
+			
+			uploadUL.append(str);
+		} 
+		
+		//submit button을 클릭시
+		var formObj = $("form[role='form']");
+		
+		$("button[type='submit']").on("click", function(e)){
+			
+			e.preventDefault();
+			
+			console.log("submit clicked");
+		}
 		
 		
 	});
