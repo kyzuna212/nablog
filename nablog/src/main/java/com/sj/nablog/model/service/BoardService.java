@@ -26,4 +26,8 @@ public interface BoardService {
 
 	/*전체 카테고리에서 검색한  목록 총 갯수를 조회합니다*/
 	public int selectTotalCount(String search);
+	
+	/*게시물 등록*/
+	public void insert(BoardVO board);
+		
 }

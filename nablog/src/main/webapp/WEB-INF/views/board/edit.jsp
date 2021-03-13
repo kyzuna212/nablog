@@ -185,26 +185,6 @@
 				uploadResult.append(str);
 	}
 	
-	//x 버튼 눌렀을 때 첨부파일 삭제
-	$.(".uploadResult").on("click", "span", function(e){
-		
-		var targetFile = $(this).data("file");
-		var type = $(this).data("type");
-		console.log(targetFile);
-		
-		//첨부파일의 경로와 이름, 파일의 종류(이미지 혹은 일반) 정보 전송
- 		$.ajax({
-			url : '/deleteFile.do',
-			data : {fileName : targetFile , type : type},
-			dataType : 'text',
-			type : 'POST',
-				success : function(result){
-					alert(result);
-				}
-			
-		});
-	});
-
 
 	$(document).ready(function() {
 		//main페이지를 제외한 나머지 페이지에서는 목록을 항상 보이게 한다
@@ -268,6 +248,7 @@
 			
 			var str="";
 			
+			//첨부파일에 관련된 정보 (data-uuid, data-filename, data-type)포함
 			$(uploadResultArr).each(function(i, obj){
 				
 				//image type
@@ -275,9 +256,11 @@
 					
 					var fileCallPath = encodeURIComponent( obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
 					
-					str += "<li><div>";
+					str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName"' ";
+					str += "data-type='"+obj.image+"'><div>";
 					str += "<span>"+obj.fileName+"</span>";
-					str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+					str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 					str += "<img src='/display.do?fileName="+fileCallPath"'>";
 					str += "</div>";
 					str + "</li>";
@@ -288,9 +271,11 @@
 					
 					var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
 					
-					str += "<li><div>";
+					str += "<li data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' ";
+					str += "data-type='"+obj.image+"'><div>";
 					str += "<span>"+obj.fileName+"</span>";
-					str += "<button type='button' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+					str += "<button type='button' data-file=\'"+fileCallPath+"\'"
+					str += "data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
 					str += "<img src='/resources/images/icons8-file.png'>";
 					str += "</div>";
 					str + "</li>";
@@ -300,6 +285,30 @@
 			uploadUL.append(str);
 		} 
 		
+		//x 버튼 눌렀을 때 첨부파일 삭제
+		$(".uploadResult").on("click", "button", function(e){
+			
+			console.log("delete file");
+			
+			var targetFile = $(this).data("file");
+			var type = $(this).data("type");
+			//console.log(targetFile);
+			
+			var targetLi = $(this).closest("li");
+			
+			//첨부파일의 경로와 이름, 파일의 종류(이미지 혹은 일반) 정보 전송
+	 		$.ajax({
+				url : '/deleteFile.do',
+				data : {fileName : targetFile , type : type},
+				dataType : 'text',
+				type : 'POST',
+					success : function(result){
+						alert(result);
+					}
+				
+			});
+		});
+		
 		//submit button을 클릭시
 		var formObj = $("form[role='form']");
 		
@@ -308,8 +317,27 @@
 			e.preventDefault();
 			
 			console.log("submit clicked");
+			
+			var str = "";
+			
+			//파일 정보를 hidden으로 같이 보냄
+			$(".uploadResult ul li").each(function(i,obj){
+				
+				var jobj = $(obj);
+				
+				console.dir(jobj);
+				
+				str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+job.data("uuid")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+job.data("path")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].imageType' value='"+job.data("type")+"'>";
+			});
+			
+			formObj.append(str).submit();
+			
 		}
 		
+
 		
 	});
 	

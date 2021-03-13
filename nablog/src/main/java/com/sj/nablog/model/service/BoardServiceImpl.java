@@ -2,9 +2,12 @@ package com.sj.nablog.model.service;
 
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sj.nablog.mapper.AttachFileMapper;
 import com.sj.nablog.mapper.BoardMapper;
 import com.sj.nablog.model.domain.BoardVO;
 
@@ -12,9 +15,14 @@ import lombok.Setter;
 
 @Service
 public class BoardServiceImpl implements BoardService {
+	
+	private static final Logger log = LoggerFactory.getLogger(BoardServiceImpl.class);
 
 	@Setter(onMethod_ = {@Autowired})
 	private BoardMapper boardMapper;
+	
+	@Setter(onMethod_ = {@Autowired})
+	private AttachFileMapper attachFileMapper;
 	
 	/*메뉴카테고리에 해당하는 글 목록을 가져옵니다*/
 	@Override
@@ -75,6 +83,27 @@ public class BoardServiceImpl implements BoardService {
 	public int selectTotalCount(String search) {
 		
 		return boardMapper.selectTotalCount(search);
+	}
+	
+	/*게시물 등록*/
+	@Override
+	public void insert(BoardVO board) {
+		
+		log.info("insert...."+board);
+		
+		//먼저 게시물 등록
+		//boardMapper.insertSelectKey(board);
+		
+		if(board.getAttachList() ==null || board.getAttachList().size() <=0) {
+			return;
+		}
+		
+		//등록 번호를 가지고 첨부파일 등록
+		board.getAttachList().forEach(attach ->{
+			
+			attach.setBno(board.getBno());
+			attachFileMapper.insertFile(attach);
+		});
 	}
 
 }

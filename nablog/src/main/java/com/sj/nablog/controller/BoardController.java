@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sj.nablog.common.domain.AttachFile;
 import com.sj.nablog.common.domain.PagingList;
@@ -102,7 +103,7 @@ public class BoardController {
 	@ResponseBody
 	public ResponseEntity<List<AttachFile>> uploadAjaxFile(MultipartFile[] uploadFile) {
 
-		List<AttachFile> list = new ArrayList();	
+		List<AttachFile> list = new ArrayList<AttachFile>();	
 		
 		String uploadFolder = "C:\\upload";
 		
@@ -157,7 +158,7 @@ public class BoardController {
 				if(checkImageType(saveFile)) {
 					
 					//이미지 여부 체크 저장 
-					attachFile.setImage(true);
+					attachFile.setImageType(true);
 					
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_"+ uploadFileName));
 					
@@ -285,6 +286,27 @@ public class BoardController {
 		}
 		
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}
+	
+	//게시물 등록
+	@PostMapping("/insert.do")
+	public String insert(BoardVO board, RedirectAttributes rttr) {
+		
+		log.info("=====================================");
+		
+		log.info("insert : "+ board);
+
+		if(board.getAttachList() !=null) {
+			
+		//	board.getAttachList().forEach(attach -> log.info(attach));
+		}
+		
+		log.info("=====================================");
+		
+		boardService.insert(board);
+		
+		rttr.addFlashAttribute("result", board.getBno());
+		return "redirect:/board/list.do";
 	}
 	
 	//오늘 날짜의 경로를 문자열로 생성 (폴더 저장을 날짜별로 분류하기 위함)
