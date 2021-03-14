@@ -5,6 +5,12 @@ DROP TABLE MENU CASCADE CONSTRAINTS;
 DROP TABLE REPLY CASCADE CONSTRAINTS;
 DROP TABLE ATTACHFILE CASCADE CONSTRAINTS;
 
+--시퀀스 삭제
+DROP SEQUENCE SEQ_BOARD_BNO;
+DROP SEQUENCE SEQ_MENU_MENU_CATE_NO;
+DROP SEQUENCE SEQ_REPLY_REPLY_NO;
+DROP SEQUENCE SEQ_ATTACHFILE_FILE_NO;
+
 --멤버 테이블 생성
 CREATE TABLE MEMBER (
     ID VARCHAR2(20) PRIMARY KEY,
@@ -38,20 +44,23 @@ COMMENT ON COLUMN MENU.MENU_CATE_REF IS '메뉴 카테고리 참조번호';
 --COMMENT ON COLUMN MENU.CATE_YN IS '카테고리 여부';
 COMMENT ON COLUMN MENU.MENU_TIT IS '메뉴 제목';
 
+--시퀀스 생성
+CREATE SEQUENCE SEQ_MENU_MENU_CATE_NO;
+
 --메뉴 데이터
 INSERT INTO MENU VALUES( 0, 0, '메인' );
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 0, '메뉴 메인카테고리1');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 1, '카테고리1-1');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 1, '카테고리1-2');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 1, '카테고리1-3');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 0, '메뉴 메인카테고리2');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 5, '카테고리2-1');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 5, '카테고리2-2');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 5, '카테고리2-3');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 0, '메뉴 메인카테고리3');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 9, '카테고리3-1');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 9, '카테고리3-2');
-INSERT INTO MENU VALUES( (SELECT NVL( MAX (MENU_CATE_NO), 0 )+1 FROM MENU ), 9, '카테고리3-3');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 0, '메뉴 메인카테고리1');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 1, '카테고리1-1');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 1, '카테고리1-2');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 1, '카테고리1-3');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 0, '메뉴 메인카테고리2');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 5, '카테고리2-1');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 5, '카테고리2-2');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 5, '카테고리2-3');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 0, '메뉴 메인카테고리3');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 9, '카테고리3-1');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 9, '카테고리3-2');
+INSERT INTO MENU VALUES( SEQ_MENU_MENU_CATE_NO.NEXTVAL, 9, '카테고리3-3');
 
 --메뉴 테이블 확인
 SELECT * FROM MENU;
@@ -87,9 +96,13 @@ COMMENT ON COLUMN BOARD.B_VIEW IS '게시글 조회수';
 COMMENT ON COLUMN BOARD.RGBD_ID IS '게시글 작성자';
 COMMENT ON COLUMN BOARD.B_USYN IS '게시글 사용여부';
 
+--시퀀스 생성
+CREATE SEQUENCE SEQ_BOARD_BNO;
+
 --게시판 샘플 내용
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'샘플 데이터를 작성해볼려고 해요 '
            , '달고나가 진짜 맛있다. 왜 이렇게 단게 땡기는 것인지 모르겠다 정말 맛있다. 달고나 빵 먹고 싶은데 '
@@ -101,7 +114,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     );
 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+          SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'이 땅에서 사셨던 역사적 예수와 십자가의 죽음을'
            , '누가 될까요? 어떤 사람이 돼야 할까요? 그 전에 먼저 대통령 비서실장이라는 공직에 대해 간단히 알아보겠습니다. 이승만 대통령 시절 경무대 비서실 '
@@ -113,7 +127,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     );
     
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES(  
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'첫번째 리뷰어가 되어주세요.'
            , '경북 구미의 한 카페 신입사원과 사장님의 거침없는 입담 속에서 서로를 이해해 가는 시간을 가져보았습니다.구미 채미정에 오셔서 꼭 일편단심의 의미를 '
@@ -125,7 +140,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     );
     
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES(  
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'다음을 가리키는 말이다.'
            , '하룻밤 자고 나면 사라지는 꿈처럼 너를
@@ -139,7 +155,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     );
     
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'전 세계에서 아이디어를 가장 많이 모아 놓은'
            , '액션 정국이는 댄브 턴 동작을 완벽하게 하고 싶어해서 안무가에게 계속 물어보고 저 한동작을 연습하고 또 연습했다고 '
@@ -151,7 +168,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     );
 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'천고에 사라지지 않는 것이다?'
            , '인류의 역사를 꾸며 내려온 동력은 바로 이것이다 이성은 투명하되 얼음과 같으며 지혜는 날카로우나 갑 속에 든 칼이다 청춘의 끓는 피가 아니더면
@@ -164,7 +182,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     );
     
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'인간이 얼마나 쓸쓸하랴?'
            , '구하기
@@ -179,7 +198,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     ); 
     
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'노년에게서 구하지 못할 바이며'
            , '아름답고 소담스러운 열매를 맺어 우리
@@ -194,7 +214,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     ); 
 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+             SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'동력은 바로 이것이다'
            , '천고에	사라지지 않는 것이다 이것은 현저하게 일월과 같은 예가 되려니와 그와 같지 못하다 할지라도 창공에 반짝이는 뭇 별과 같이 산야에 피어나는 군영과 같이 이상은 실로 인간의 부패를 방지하는 소금이라 할지니 인생에 가치를 주는 원질이 되는 것이다 그들은 앞이 긴지라 착목한는 곳이 원대하고 그들은 피가 더운지라 실현에 대한 자신과 용기가 있다 그러므로 그들은 이상의 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을 풍부하게 하는 것이다 보라 청춘을 ! 그들의 몸이 얼마나 튼튼하며 그들의 피부가 얼마나 생생하며 그들의 눈에 무엇이 타오르고 '
@@ -206,7 +227,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     ); 
   
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'무엇이 타오르고 있는가'
            , ' 이성은 투명하되 얼음과 같으며 지혜는 날카로우나 갑 속에 든 칼이다 청춘의 끓는 피가 아니더면 인간이 얼마나 쓸쓸하랴? 얼음에 싸인 만물은 얼음이 있을 뿐이다 그들에게 생명을 불어 넣는 것은 따뜻한 봄바람이다 풀밭에 속잎나고 가지에 싹이 트고 꽃 피고 새 우는 봄날의 천지는 얼마나 기쁘며 얼마나 아름다우냐? 이것을 얼음 속에서 불러 내는 것이 따뜻한 봄바람이다 인생에 따뜻한
@@ -220,7 +242,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     );
     
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES(
+             SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'이것은 테스트라는 것입니다'
            , '시험, 혹은 실험. 프로토타입 등의 무언가를 검사 혹은 시험한다는 의미로도 쓰인다. '
@@ -232,7 +255,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
     );    
 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -245,7 +269,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
 
 --여기부터는 그저 복붙일 뿐임
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -256,7 +281,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -267,7 +293,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -278,7 +305,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -289,73 +317,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -366,7 +329,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     );
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -377,7 +341,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -388,7 +353,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -399,7 +365,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -410,7 +377,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -421,7 +389,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -432,7 +401,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -441,295 +411,10 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,2
            ,'admin11'
            ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
-INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
-           ,1
-           ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
-           , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
-           ,'2020-8-11'
-           ,''
-           ,2
-           ,'admin11'
-           ,'Y'
-    ); 
+    );
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -740,7 +425,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -751,7 +437,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -762,7 +449,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -773,7 +461,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -784,7 +473,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -795,7 +485,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -804,9 +495,10 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,2
            ,'admin11'
            ,'Y'
-    ); 
+    );
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -817,7 +509,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -828,7 +521,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -839,7 +533,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -850,7 +545,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -861,7 +557,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -872,7 +569,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -881,9 +579,10 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,2
            ,'admin11'
            ,'Y'
-    ); 
+    );
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -894,7 +593,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -905,7 +605,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -916,7 +617,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -927,7 +629,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -938,7 +641,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -949,7 +653,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -958,9 +663,10 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,2
            ,'admin11'
            ,'Y'
-    ); 
+    );
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -971,7 +677,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -982,7 +689,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -993,7 +701,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1004,7 +713,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1015,7 +725,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1026,7 +737,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1035,9 +747,10 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,2
            ,'admin11'
            ,'Y'
-    ); 
+    );
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1048,7 +761,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1059,7 +773,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1070,7 +785,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1081,7 +797,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1092,7 +809,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1103,7 +821,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1112,9 +831,10 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,2
            ,'admin11'
            ,'Y'
-    ); 
+    );
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1125,7 +845,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1136,7 +857,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1147,7 +869,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1158,7 +881,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1169,7 +893,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1180,7 +905,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1189,9 +915,10 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,2
            ,'admin11'
            ,'Y'
-    ); 
+    );
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1202,7 +929,8 @@ VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
            ,'Y'
     ); 
 INSERT INTO BOARD 
-VALUES(  (SELECT NVL( MAX (B_NO), 0 )+1 FROM BOARD )
+VALUES( 
+            SEQ_BOARD_BNO.NEXTVAL
            ,1
            ,'대개 코딩이나 디자인된 내용이 일반 컴에서도 무난하게 돌아가는지'
            , '갑자기 튕긴다거나 예상치 못했던 기능, 예컨데 불필요한 연산을 마구 한다던가 등을 찾기 위해 초기엔 프로토타입인 알파에 이어'
@@ -1248,6 +976,9 @@ COMMENT ON COLUMN REPLY.REPLY_DATE IS '댓글 작성일자';
 COMMENT ON COLUMN REPLY.REPLY_USYN IS '댓글 사용여부';
 COMMENT ON COLUMN REPLY.MENU_ID IS '메뉴 아이디';
 
+--시퀀스 생성
+CREATE SEQUENCE SEQ_REPLY_REPLY_NO;
+
 --첨부파일 저장 테이블 생성
 CREATE TABLE ATTACHFILE (
     FILE_NO NUMBER PRIMARY KEY,
@@ -1269,6 +1000,11 @@ COMMENT ON COLUMN ATTACHFILE.UUID IS 'UUID값';
 COMMENT ON COLUMN ATTACHFILE.IMAGETYPE IS '이미지 여부'; 
 COMMENT ON COLUMN ATTACHFILE.B_NO IS '게시글 번호';
 
+--시퀀스 생성
+CREATE SEQUENCE SEQ_ATTACHFILE_FILE_NO;
+
+--시퀀스 조회
+SELECT * FROM USER_SEQUENCES;
 
 --커밋
 COMMIT;

@@ -306,7 +306,7 @@ public class BoardController {
 		boardService.insert(board);
 		
 		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/list.do";
+		return "redirect:/list.do";
 	}
 	
 	//오늘 날짜의 경로를 문자열로 생성 (폴더 저장을 날짜별로 분류하기 위함)

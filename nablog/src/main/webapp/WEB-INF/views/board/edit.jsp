@@ -23,42 +23,50 @@
 <div id="all_wrap">
 
 		<!-- 콘텐츠 -->
-		<div id="mainbody">
-			<form id="inputForm" action="/insert.do" method="post">
-				<label for="menuCateNo" >카테고리 *</label>
-				<select name="menuCateNo" id="menuCateNo">
-					<c:forEach var="no" items="${menuList}" varStatus="index">
-						<option value="${no.menuCateNo}" ${no.menuCateNo==menu.menuCateNo ? 'selected=selected' :''}  >${no.menuTit}</option>
-					</c:forEach>
-				</select>
-				
-				<label for="bTitle" >제목 *</label>
-				<input type="text" id="bTitle" name="bTitle" placeholder="제목을 입력해주세요" required>
-				
-
-				<textarea name="bCnt" id="editor" rows="10" cols="100" ></textarea>
-				<div class="form-group uploadDiv">
-					<label for="editor" >첨부파일</label>
-					<input type="file" id="bOrfile" name="uploadFile" multiple> <!-- input type='file'은 readonly -->
-					<button id="uploadBtn">Upload</button>
-				</div>
-				<!-- ul태그 내에 업로드된 파일의 이름을 보여주기 -->
-				<div class="uploadResult">
-					<ul>
-					
-					</ul>
-				</div>
-				
-				<label for="editor" >태그</label>
-				<input type="text" id="bTage" name="bTage">
-				
-				<!-- 썸네일 클릭시 보여지는 원본이미지  -->
-				<div class="bigPictureWrapper">
-					<div class="bigPicture">
+		<article id="content">
+			<div id="mainbody">
+				<form id="inputForm" action="${pageContext.servletContext.contextPath}/insert.do" method="post">
+					<div class="category">
+						<label for="menuCateNo" >카테고리 *</label>
+						<select name="menuCateNo" id="menuCateNo">
+							<c:forEach var="no" items="${menuList}" varStatus="index">
+								<option value="${no.menuCateNo}" ${no.menuCateNo==menu.menuCateNo ? 'selected=selected' :''}  >${no.menuTit}</option>
+							</c:forEach>
+						</select>
 					</div>
-				</div>
-			</form>
-		</div>
+					<div class="title">
+						<label for="bTitle" >제목 *</label>
+						<input type="text" id="bTitle" name="bTitle" class="btitle" placeholder="제목을 입력해주세요" required>
+					</div>
+	
+					<textarea name="bCnt" id="editor" rows="10" cols="100" ></textarea>
+					<div class="form-group uploadDiv">
+						<label for="editor" >첨부파일</label>
+						<input type="file" id="bOrfile" name="uploadFile" multiple> <!-- input type='file'은 readonly -->
+<!-- 						<button id="uploadBtn">Upload</button> -->
+					</div>
+					<!-- ul태그 내에 업로드된 파일의 이름을 보여주기 -->
+					<div class="uploadResult">
+						<ul>
+						
+						</ul>
+					</div>
+					
+					<div class="tags">
+						<label for="editor" >태그</label>
+						<input type="text" id="bTage" name="bTage">
+					</div>
+					<!-- 썸네일 클릭시 보여지는 원본이미지  -->
+					<div class="bigPictureWrapper">
+						<div class="bigPicture">
+						</div>
+					</div>
+					<div class="submit">
+						<input type="submit" value="저장">
+					</div>
+				</form>
+			</div>
+		</article>
 </div>
 
 <script type="text/javascript">

@@ -92,7 +92,7 @@ public class BoardServiceImpl implements BoardService {
 		log.info("insert...."+board);
 		
 		//먼저 게시물 등록
-		//boardMapper.insertSelectKey(board);
+		boardMapper.insert(board);
 		
 		if(board.getAttachList() ==null || board.getAttachList().size() <=0) {
 			return;

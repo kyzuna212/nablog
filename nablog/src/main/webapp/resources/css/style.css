@@ -212,6 +212,18 @@ iframe {
 .bigPicture img{
 	width:600px;
 }
+lable {
+
+	 display : inline;
+}
+.btitle {
+	 display : inline;
+}
+div.title , div.category, .form-group, .uploadResult, .tags, .submit {
+	margin-left : 100px;
+	margin-bottom : 20px;
+	margin-top : 20px;
+}
 
 
 /* 공통  디자인  */

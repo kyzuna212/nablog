@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sj.nablog.mapper.BoardMapper">
+<mapper namespace="com.sj.nablog.mapper.BoardMapper"> <!-- namespace는 Mapper인터페이스와 동일한 이름 -->
     
     <resultMap type="com.sj.nablog.model.domain.BoardVO" id="resultList">
     	<id property="bno" column="b_no"/>  		<!-- 게시글 번호 -->
@@ -18,7 +18,7 @@
     </resultMap>
     
     <!-- 목록 총 갯수를 조회합니다 -->
-      <select id="selectTotalCount" resultType="_int">
+      <select id="selectTotalCount" resultType="_int"> <!-- select의 id는 mapper의 메서드 이름과 일치해야함 / resultType 속성의 값은 select쿼리의 결과를 특정 클래스의 객체로 만듦 -->
     	
     		 SELECT COUNT(*)  
    			 FROM BOARD
@@ -82,5 +82,11 @@
 		FROM 
 			(SELECT B_TAG, B_VIEW FROM BOARD WHERE B_TAG IS NOT NULL ORDER BY B_VIEW DESC ) A
 		
-	</select>    
+	</select> 
+	
+	<!--게시물을 등록합니다 -->
+	<insert id="insert">
+		INSERT INTO BOARD VALUES (SEQ_BOARD_BNO.NEXTVAL , #{menuCateNo}, #{bTitle}, #{bCnt}, DEFAULT, #{bTage}, 0 , DEFAULT, Y  )
+	</insert>
+	 
 </mapper>
