@@ -1,1 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sj.nablog.mapper.ReplyMapper"> <!-- namespace는 Mapper인터페이스와 동일한 이름 -->
+
+ 	<resultMap type="com.sj.nablog.model.domain.ReplyVO" id="resultList">
+    	<id property="replyNo" column="REPLY_NO"/>  		<!-- 댓글 번호 -->
+    	<result property="replyId" column="REPLY_ID"/> 	<!--  댓글 작성자 아이디 -->
+    	<result property="replyCnt" column="REPLY_CNT"/> 		<!-- 댓글 내용 -->
+    	<result property="replyLock" column="REPLY_LOCK"/> 		<!-- 댓글 비밀글 여부 -->
+    	<result property="bno" column="B_NO"/> 		<!--게시판 글 번호 -->
+    	<result property="replyRef" column="REPLY_REF"/> 		<!-- 참조 글 번호 -->
+    	<result property="replySrt" column="REPLY_SRT"/>  	<!-- 댓글 순서 -->
+    	<result property="replyDate" column="REPLY_DATE"/> 	<!-- 댓글 작성일자 -->
+    	<result property="replyUsyn" column="REPLY_USYN"/> 		<!-- 댓글 사용여부 -->
+    	<result property="menuId" column="MENU_ID"/> 		<!-- 메뉴 아이디 -->
+    
+    </resultMap>
+    
+    <!-- 게시글 번호에 해당하는 댓글을 불러온다 -->
+    <select id="selectList" resultType="int">
+    	SELECT * FROM REPLY WHERE B_NO=#{bno}
+    </select>
+    
+
+</mapper>
