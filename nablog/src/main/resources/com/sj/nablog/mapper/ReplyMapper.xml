@@ -8,18 +8,31 @@
     	<result property="replyCnt" column="REPLY_CNT"/> 		<!-- 댓글 내용 -->
     	<result property="replyLock" column="REPLY_LOCK"/> 		<!-- 댓글 비밀글 여부 -->
     	<result property="bno" column="B_NO"/> 		<!--게시판 글 번호 -->
+    	<result property="replyLevel" column="REPLY_LEVEL"/> 		<!--댓글레벨 -->
     	<result property="replyRef" column="REPLY_REF"/> 		<!-- 참조 글 번호 -->
     	<result property="replySrt" column="REPLY_SRT"/>  	<!-- 댓글 순서 -->
     	<result property="replyDate" column="REPLY_DATE"/> 	<!-- 댓글 작성일자 -->
     	<result property="replyUsyn" column="REPLY_USYN"/> 		<!-- 댓글 사용여부 -->
-    	<result property="menuId" column="MENU_ID"/> 		<!-- 메뉴 아이디 -->
     
     </resultMap>
     
     <!-- 게시글 번호에 해당하는 댓글을 불러온다 -->
-    <select id="selectList" resultType="int">
+    <select id="selectList" resultType="int" resultMap="resultList">
+
     	SELECT * FROM REPLY WHERE B_NO=#{bno}
+ 
     </select>
+    
+    <insert id="insert">
+    	<!-- 댓글 일 경우 -->
+    	<if test="replyLevel ==1">
+    		INSERT INTO REPLY VALUES (SEQ_REPLY_REPLY_NO.NEXTVAL, #{replyId}, #{replyCnt}, #{replyLock}, #{bno}, 1, SEQ_REPLY_REPLY_NO.NEXTVAL, #{replySrt}, SYSDATE, 'Y')
+    	</if>
+    	<!-- 대댓글일 경우 -->
+    	<if test="replyLevel ==2">
+    		INSERT INTO REPLY VALUES (SEQ_REPLY_REPLY_NO.NEXTVAL, #{replyId}, #{replyCnt}, #{replyLock}, #{bno}, 2, #{replyNo}, #{replySrt}, SYSDATE, 'Y')
+    	</if>
+    </insert>
     
 
 </mapper>

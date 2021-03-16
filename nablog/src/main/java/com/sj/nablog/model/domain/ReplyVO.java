@@ -13,10 +13,11 @@ public class ReplyVO {
 	private String replyCnt;	//댓글 내용
 	private String replyLock;	//댓글 비밀글 여부
 	private String bno;	//게시판 글 번호
+	private String replyLevel; //댓글레벨
 	private int replyRef;	//참조 글 번호
 	private int replySrt;	//댓글 순서
 	private Date replyDate;	//댓글 작성일자
 	private String replyUsyn;	//댓글 사용여부
-	private String menuId;	//메뉴 아이디
+
 	
 }
