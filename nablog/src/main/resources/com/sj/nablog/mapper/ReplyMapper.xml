@@ -19,7 +19,7 @@
     <!-- 게시글 번호에 해당하는 댓글을 불러온다 -->
     <select id="selectList" resultType="int" resultMap="resultList">
 
-    	SELECT * FROM REPLY WHERE B_NO=#{bno}
+    	SELECT * FROM REPLY WHERE B_NO=#{bno} ORDER BY REPLY_REF ,REPLY_LEVEL, REPLY_SRT  
  
     </select>
     

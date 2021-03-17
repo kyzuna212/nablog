@@ -75,8 +75,11 @@ public class BoardController {
 	
 	//상세 페이지로 이동
 	@RequestMapping("/detail.do")
-	public String moveDetailPage(Model model) {
+	public String moveDetailPage(@RequestParam("bno")String bno, Model mode ) {
 
+		//조회수 누적
+		boardService.updatebView(bno);
+		
 		return "board/detail";
 	}
 	

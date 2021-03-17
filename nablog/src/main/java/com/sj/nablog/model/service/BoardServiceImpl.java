@@ -87,23 +87,33 @@ public class BoardServiceImpl implements BoardService {
 	
 	/*게시물 등록*/
 	@Override
-	public void insert(BoardVO board) {
+	public int insert(BoardVO board) {
 		
 		log.info("insert...."+board);
 		
 		//먼저 게시물 등록
-		boardMapper.insert(board);
+		int result = boardMapper.insert(board);
 		
 		if(board.getAttachList() ==null || board.getAttachList().size() <=0) {
-			return;
+			return result;
+		}else {
+				//등록 번호를 가지고 첨부파일 등록
+				/*
+				 * board.getAttachList().forEach(attach ->{
+				 * 
+				 * attach.setBno(board.getBno()); // result =
+				 * attachFileMapper.insertFile(attach); });
+				 */
 		}
+
+		return result;
+	}
+
+	/*조회수 누적*/
+	@Override
+	public int updatebView(String bno) {
 		
-		//등록 번호를 가지고 첨부파일 등록
-		board.getAttachList().forEach(attach ->{
-			
-			attach.setBno(board.getBno());
-			attachFileMapper.insertFile(attach);
-		});
+		return boardMapper.updatebView(bno);
 	}
 
 }

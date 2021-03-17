@@ -28,6 +28,9 @@ public interface BoardService {
 	public int selectTotalCount(String search);
 	
 	/*게시물 등록*/
-	public void insert(BoardVO board);
+	public int insert(BoardVO board);
+
+	/*조회수 누적*/
+	public int updatebView(String bno);
 		
 }

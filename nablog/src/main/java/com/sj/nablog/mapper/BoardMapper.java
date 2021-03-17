@@ -32,6 +32,9 @@ public interface BoardMapper {
 	public int selectTotalCount(String search);
 	
 	/*게시물을 등록합니다*/
-	public void insert(BoardVO board);
+	public int insert(BoardVO board);
+
+	/*조회수 누적*/
+	public int updatebView(String bno);
 
 }
