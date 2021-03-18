@@ -109,11 +109,25 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
-	/*조회수 누적*/
+	/*게시물 조회수를 1 증가시킵니다*/
 	@Override
-	public int updatebView(String bno) {
+	public int updatebView(int bno) {
 		
 		return boardMapper.updatebView(bno);
+	}
+
+	/*게시글 번호에 해당하는 게시물을 불러옵니다*/
+	@Override
+	public BoardVO selectOne(int bno) {
+		
+		return boardMapper.selectOne(bno);
+	}
+
+	/* 해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기 */
+	@Override
+	public BoardVO selectConList(int bno, int menuCateNo) {
+		
+		return boardMapper.selectConList(bno, menuCateNo);
 	}
 
 }

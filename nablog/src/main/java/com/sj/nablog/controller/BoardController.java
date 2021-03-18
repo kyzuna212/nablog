@@ -38,6 +38,7 @@ import com.sj.nablog.common.domain.PagingList;
 import com.sj.nablog.model.domain.BoardVO;
 import com.sj.nablog.model.service.BoardService;
 import com.sj.nablog.model.service.MenuService;
+import com.sj.nablog.model.service.ReplyService;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -60,6 +61,9 @@ public class BoardController {
 	@Setter(onMethod_ = {@Autowired})
 	private BoardService boardService;
 	
+	@Setter(onMethod_ = {@Autowired})
+	private ReplyService replyService;
+	
 	//목록 페이지로 이동
 	@RequestMapping("/list.do")
 	public String movePage(BoardVO boardVO,@RequestParam(value="pg", defaultValue="1") int pg, Model model) {
@@ -75,11 +79,17 @@ public class BoardController {
 	
 	//상세 페이지로 이동
 	@RequestMapping("/detail.do")
-	public String moveDetailPage(@RequestParam("bno")String bno, Model mode ) {
+	public String moveDetailPage(@RequestParam("bno")int bno,@RequestParam("menuCateNo") int menuCateNo, Model model ) {
 
-		//조회수 누적
+		//게시글 조회수 누적
 		boardService.updatebView(bno);
 		
+		//게시글 번호에 해당하는 댓글 불러오기
+		model.addAttribute("reply", replyService.selectList(bno));
+		//게시글 번호에 해당하는 게시물 불러오기
+		model.addAttribute("board", boardService.selectOne(bno));
+		//해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기
+		model.addAttribute("boardList", boardService.selectConList(bno,menuCateNo));
 		return "board/detail";
 	}
 	

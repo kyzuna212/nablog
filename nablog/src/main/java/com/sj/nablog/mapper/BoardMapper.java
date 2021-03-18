@@ -34,7 +34,13 @@ public interface BoardMapper {
 	/*게시물을 등록합니다*/
 	public int insert(BoardVO board);
 
-	/*조회수 누적*/
-	public int updatebView(String bno);
+	/*게시물 조회수를 1 증가시킵니다*/
+	public int updatebView(int bno);
+
+	/*게시글 번호에 해당하는 게시물을 불러옵니다*/
+	public BoardVO selectOne(int bno);
+
+	/* 해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기 */
+	public BoardVO selectConList(int bno, int menuCateNo);
 
 }

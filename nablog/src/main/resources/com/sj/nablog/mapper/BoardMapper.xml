@@ -89,9 +89,19 @@
 		INSERT INTO BOARD VALUES (SEQ_BOARD_BNO.NEXTVAL , #{menuCateNo}, #{bTitle}, #{bCnt}, DEFAULT, #{bTage}, 0 , DEFAULT, Y  )
 	</insert>
 	
-	<!-- 조회수 누적 -->
+	<!-- 게시물 조회수를 1 증가시킵니다 -->
 	<update id="updatebView">
 		UPDATE BOARD SET B_VIEW = (SELECT B_VIEW FROM BOARD WHERE B_NO = #{bno}) + 1 WHERE B_NO = #{bno}
 	</update>
+	
+	<!-- 게시글 번호에 해당하는 게시물을 불러옵니다 -->
+	<select id="selectOne" resultMap="resultList">
+		SELECT * FROM BOARD WHERE B_NO = #{bno}
+	</select>
+	
+	<!-- 해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기 -->
+	<select id="selectConList" resultMap="resultList">
+		SELECT * FROM BOARD WHERE B_NO = #{bno} AND MENU_CATE_NO = #{menuCateNo}
+	</select> 
 	 
 </mapper>

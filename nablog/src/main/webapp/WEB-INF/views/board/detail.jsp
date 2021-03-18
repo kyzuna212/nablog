@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,12 +22,12 @@
 
 					<div class="post-cover-detail">
 						<div class="inner">
-							<span class="category">카테고리명</span>
-							<h1>콘텐츠 제목</h1>
+							<span class="category">${menu.menuTit eq null ? '전체' : menu.menuTit}</span>
+							<h1>${board.bTitle}</h1>
 							<span class="meta"> 
 								<!-- <span class="author">by 나츠키</span> -->
-								<span class="date">2020. 5. 20.</span>
-
+								<span class="date">${board.bDate}</span>
+								<span class="cnt">${board.bView}</span>
 							</span>
 						</div>
 					</div>
@@ -35,7 +35,7 @@
 					<div class="entry-content">
 						<div class="tt_article_useless_p_margin">
 							<div class="main_contents">
-								<p>본문 내용이 나오는 곳</p>
+								<p>${board.bCnt}</p>
 							</div>
 							<div class="container_postbtn_detail #post_button_group">
 								<div class="postbtn_like">
@@ -89,31 +89,16 @@
 
 							<div class="another_category_detail another_category_color_gray">
 								<h4>
-									'<a href="#">카테고리명</a>' 카테고리의 다른 글
+									'<a href="#">${menu.menuTit eq null ? '전체' : menu.menuTit}</a>'의 다른 글
 								</h4>
 								<table>
 									<tbody>
-										<tr>
-											<th><a href="#">다른 글의 제목임</a>&nbsp;&nbsp;<span>(0)</span>
-											</th>
-										<!-- 	<td>2019.11.10</td> -->
-										</tr>
-										<tr>
-											<th><a href="#" class="current">또 다른 글 제목임</a>&nbsp;&nbsp;<span>(0)</span></th>
-											<!-- <td>2020.12.10</td> -->
-										</tr>
-										<tr>
-											<th><a href="#">블로그 글 제목임</a>&nbsp;&nbsp;<span>(0)</span></th>
-											<!-- <td>2021.01.07</td> -->
-										</tr>
-										<tr>
-											<th><a href="#">또 다른 블로그 글 제목임</a>&nbsp;&nbsp;<span>(0)</span></th>
-											<!-- <td>2021.01.16</td> -->
-										</tr>
-										<tr>
-											<th><a href="#">블로그제목이여</a>&nbsp;&nbsp;<span>(0)</span></th>
-											<!-- <td>2021.02.04</td> -->
-										</tr>
+										<c:forEach var="boardList" items="${boardList}">
+											<tr>
+												<th><a href="#">${boardList.bTitle}</a>&nbsp;&nbsp;<span>(${boardList.bView})</span></th>
+												<td>${boardList.bDate}</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -121,8 +106,25 @@
 
 						<div class="comments_detail">
 							<h2>
-								댓글<span class="count"><span id="commentCount159_0">0</span></span>
+								댓글<span class="count"><span id="commentCount159_0">${fn:length(reply)}</span></span>
 							</h2>
+							<div>
+								<ul>
+									<c:if test="${!empty reply}">
+										<c:forEach var="reply" items=${reply}>
+											<!-- 댓글일 경우 -->
+											<c:if test="${reply.replyLevel eq 1}">
+												<li>${reply.replyCnt}</li>
+											</c:if>
+											<!-- 대댓글일 경우 -->
+											<c:if test="${reply.replyLevel eq 2}">
+												<li>&nbsp;&nbsp;${reply.replyCnt}</li>
+											</c:if>
+											
+										</c:forEach>
+									</c:if>
+								</ul>
+							</div>
 							<div id="entry159Comment">
 
 
