@@ -91,12 +91,12 @@
 	
 	<!-- 게시물 조회수를 1 증가시킵니다 -->
 	<update id="updatebView">
-		UPDATE BOARD SET B_VIEW = (SELECT B_VIEW FROM BOARD WHERE B_NO = #{bno}) + 1 WHERE B_NO = #{bno}
+		UPDATE BOARD SET B_VIEW = (SELECT B_VIEW FROM BOARD WHERE B_NO = #{bno}) + 1 WHERE B_NO = #{bno} AND B_USYN = #{bUsyn}
 	</update>
 	
 	<!-- 게시글 번호에 해당하는 게시물을 불러옵니다 -->
 	<select id="selectOne" resultMap="resultList">
-		SELECT * FROM BOARD WHERE B_NO = #{bno}
+		SELECT * FROM BOARD WHERE B_NO = #{bno} AND B_USYN = #{bUsyn}
 	</select>
 	
 	<!-- 해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기 -->
