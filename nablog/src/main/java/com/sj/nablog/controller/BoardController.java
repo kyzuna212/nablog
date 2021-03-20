@@ -84,12 +84,15 @@ public class BoardController {
 		//게시글 조회수 누적
 		boardService.updatebView(bno);
 		
+		//rowNum값 가져오기
+		int rowNum =boardService.selectRowNum(bno);
+		
 		//게시글 번호에 해당하는 댓글 불러오기
 		model.addAttribute("reply", replyService.selectList(bno));
 		//게시글 번호에 해당하는 게시물 불러오기
 		model.addAttribute("board", boardService.selectOne(bno));
 		//해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기
-		model.addAttribute("boardList", boardService.selectConList(bno,menuCateNo));
+		model.addAttribute("boardList", boardService.selectConList(bno,menuCateNo,rowNum));
 		return "board/detail";
 	}
 	

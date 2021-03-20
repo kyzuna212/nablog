@@ -125,9 +125,16 @@ public class BoardServiceImpl implements BoardService {
 
 	/* 해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기 */
 	@Override
-	public BoardVO selectConList(int bno, int menuCateNo) {
+	public BoardVO selectConList(int bno, int menuCateNo, int rowNum) {
 		
-		return boardMapper.selectConList(bno, menuCateNo);
+		return boardMapper.selectConList(bno, menuCateNo, rowNum);
+	}
+
+	/*게시글 번호로 rownum값 조회하기*/
+	@Override
+	public int selectRowNum(int bno) {
+	
+		return boardMapper.selectRowNum(bno);
 	}
 
 }

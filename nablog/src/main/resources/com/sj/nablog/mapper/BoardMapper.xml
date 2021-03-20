@@ -101,7 +101,36 @@
 	
 	<!-- 해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기 -->
 	<select id="selectConList" resultMap="resultList">
-		SELECT * FROM BOARD WHERE B_NO = #{bno} AND MENU_CATE_NO = #{menuCateNo}
+		
+		SELECT ROWNUM, A.*
+		FROM(
+			SELECT * FROM BOARD WHERE MENU_CATE_NO = #{menuCateNo}
+			) A
+		<if test="rowNum>=3">
+			<![CDATA[
+			WHERE ROWNUM >= #{rowNum-2}
+			AND ROWNUM <= #{rowNum+2}
+			]]>
+		</if>
+<!-- 		<if test="rowNum<3">
+			<![CDATA[
+			WHERE ROWNUM >= 1
+			AND ROWNUM <= 5
+			]]>
+		</if> -->
+	</select>
+	
+	<!-- 게시글 번호로 rownum값 조회하기 -->
+	<select id="selectRowNum">
+	
+	 SELECT ROWNUM
+	 FROM(
+		SELECT * FROM BOARD WHERE MENU_CATE_NO = #{menuCateNo}
+	 ) B
+	 WHERE B_NO = #{bno}
+	 
 	</select> 
+	
+
 	 
 </mapper>

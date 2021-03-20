@@ -37,6 +37,9 @@ public interface BoardService {
 	public BoardVO selectOne(int bno);
 
 	/*해당 카테고리에서 게시글 번호 앞뒤 글 최대 5글 불러오기 */
-	public BoardVO selectConList(int bno, int menuCateNo);
+	public BoardVO selectConList(int bno, int menuCateNo, int rowNum);
+	
+	/*게시글 번호로 rownum값 조회하기*/
+	public int selectRowNum(int bno);
 		
 }
