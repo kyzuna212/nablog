@@ -26,6 +26,9 @@
 		<article id="content">
 			<div id="mainbody">
 				<form id="inputForm" action="${pageContext.servletContext.contextPath}/insert.do" method="post">
+				<c:if test="{board.bno eq null}">
+					<input type="hidden" id=bno name=bno value="{board.bno}">
+				</c:if>
 					<div class="category">
 						<label for="menuCateNo" >카테고리 *</label>
 						<select name="menuCateNo" id="menuCateNo">
@@ -62,7 +65,8 @@
 						</div>
 					</div>
 					<div class="submit">
-						<input type="submit" value="저장">
+<!-- 						<input type="submit" value="저장"> -->
+						<button value="저장" onclick="goSubmit()"></button>
 					</div>
 				</form>
 			</div>
@@ -320,7 +324,7 @@
 		//submit button을 클릭시
 		var formObj = $("form[role='form']");
 		
-		$("button[type='submit']").on("click", function(e)){
+		$.("button[type='submit']").on("click", function(e)){
 			
 			e.preventDefault();
 			
@@ -348,6 +352,18 @@
 
 		
 	});
+	
+	//전송하기
+	function goSubmit(){
+		var bno =('#bno').val();
+		
+		//새글 등록
+		if(bno != null){
+			('#inputForm').action = '/insert.do' 
+		}else{//글 수정
+			('#inputForm').action = '/modify.do' 		
+		}
+	}
 	
 	
 	
