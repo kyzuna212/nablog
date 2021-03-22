@@ -112,12 +112,12 @@
 			AND ROWNUM <= #{rowNum+2}
 			]]>
 		</if>
-<!-- 		<if test="rowNum<3">
+		<if test="rowNum">
 			<![CDATA[
 			WHERE ROWNUM >= 1
 			AND ROWNUM <= 5
 			]]>
-		</if> -->
+		</if> 
 	</select>
 	
 	<!-- 게시글 번호로 rownum값 조회하기 -->
