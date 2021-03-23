@@ -69,6 +69,7 @@
 /* .pagination .selected { color: #333; }
 .pagination .next { background-position-x: -50px; } */
 .pagination a img {width:20px;}
+.on {color:red;}
 
 
 /*detail*/

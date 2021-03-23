@@ -57,21 +57,21 @@
 
 				<c:if test="${pagingList.totalSize >0}">
 					<div class="pagination">
-						<%-- <c:if test="${pagingList.prev}"> --%>
-							<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menuCateNo}&pg=${pagingList.startPage eq 1 ? 1 :pagingList.endPage-9}" class="prev"><img src="resources/images/icons8-back.png"></a> 
-						<%-- </c:if> --%>
+						<c:if test="${pagingList.prev}"> 
+							<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menu.menuCateNo}&pg=${pagingList.startPage-1}" class="prev"><img src="resources/images/icons8-back.png"></a> 
+						</c:if> 
 						<c:forEach  varStatus="num"  begin="${pagingList.startPage}" end="${pagingList.endPage}">
 							<c:if test="${num.index eq pagingList.pg}">
-								<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menuCateNo}&pg=${num.index}" class="on"><span>${num.index}</span></a>
+								<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menu.menuCateNo}&pg=${num.index}" class="on"><span>${num.index}</span></a>
 							</c:if>
 							<c:if test="${num.index ne pagingList.pg}">
-								<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menuCateNo}&pg=${num.index}"><span>${num.index}</span></a>
+								<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menu.menuCateNo}&pg=${num.index}"><span>${num.index}</span></a>
 							</c:if>
 											 
 						</c:forEach>
-						<%-- <c:if test="${pagingList.next}">	 --%>
-							<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menuCateNo}&pg=${pagingList.endPage+1}" class="next"><img src="resources/images/icons8-next.png"></a> <%-- <a><span class="selected">${pagingList.next}</span></a> --%>
-						<%-- </c:if> --%>
+						<c:if test="${pagingList.next}">
+							<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menu.menuCateNo}&pg=${pagingList.endPage+1}" class="next"><img src="resources/images/icons8-next.png"></a> <%-- <a><span class="selected">${pagingList.next}</span></a> --%>
+						</c:if>
 					 </div>
 				 </c:if>
 
@@ -94,9 +94,10 @@
     	}
  */
     });
-  /*    function goList(pg){
-    	 ${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menuCateNo}&pg=pg
-     } */
+   /*  function goList(pg){
+    	 move(${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menuCateNo}&pg=pg)
+     }  */
+     
     </script>
 
 <!-- 푸터 -->
