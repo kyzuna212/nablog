@@ -28,14 +28,14 @@
 				<div class="post-header">
 					<h1>
 						<span>${menu.menuTit eq null ? '전체' : menu.menuTit}</span><em>${fn:length(boardList)}</em> 
-						<a href="${pageContext.servletContext.contextPath}/edit.do?menuCateNo=${menu.menuCateNo eq null ? 1 :menu.menuCateNo}">글쓰기</a>
+						<a href="javascript:void(0)" onclick="goWrite();">글쓰기</a>
 					</h1>
 				</div>
 				<!-- 한 페이지에 썸네일 9개씩  -->
 				<c:if test="${!empty boardList}">
 					<c:forEach var="board" items="${boardList}" begin="0" end="${pagingList.pgSize-1}" >
 						<div class="post-item" >
-							<a href="${pageContext.servletContext.contextPath}/detail.do?bno=${board.bno}"> 
+							<a href="javascript:void(0);" onclick="goView(${board.bno})"> 
 								<span class="thum"> 
 									<img src="#" alt="">
 								</span> 
@@ -62,12 +62,11 @@
 						</c:if> 
 						<c:forEach  varStatus="num"  begin="${pagingList.startPage}" end="${pagingList.endPage}">
 							<c:if test="${num.index eq pagingList.pg}">
-								<a href="javascript:void(0);" onclick="goList(${num.index});" class="on"><span>${num.index}</span></a>
+								<a href="javascript:void(0);" onclick="goList(${num.index});"><span class="on">${num.index}</span></a>
 							</c:if>
 							<c:if test="${num.index ne pagingList.pg}">
 								<a href="javascript:void(0);" onclick="goList(${num.index});"><span>${num.index}</span></a>
-							</c:if>
-											 
+							</c:if>										 
 						</c:forEach>
 						<c:if test="${pagingList.next}">
 							<a href="javascript:void(0);" onclick="goList(${pagingList.endPage+1});" class="next"><img src="resources/images/icons8-next.png"></a> <%-- <a><span class="selected">${pagingList.next}</span></a> --%>
@@ -98,10 +97,19 @@
    
      //목록 이동
      function goList(pg){ 
-    	 console.log(pg);
-     	window.location.href=${pageContext.servletContext.contextPath}+"/list.do?menuCateNo="+${menu.menuCateNo}+"&pg="+pg; 
-     }  
-
+     	location.href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${menu.menuCateNo}&pg=" + pg; 
+     }
+     
+     //상세페이지 이동
+	 function goView(bno){
+    	location.href="${pageContext.servletContext.contextPath}/detail.do?menuCateNo=${menu.menuCateNo}&bno=" + bno;
+     }
+     
+     //글쓰기 페이지로 이동
+     function goWrite(){
+    	 location.href="${pageContext.servletContext.contextPath}/edit.do?menuCateNo=${menu.menuCateNo eq null ? 1 :menu.menuCateNo}"
+     }
+     
     </script>
 
 <!-- 푸터 -->

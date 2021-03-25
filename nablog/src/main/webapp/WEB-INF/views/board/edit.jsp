@@ -25,9 +25,9 @@
 		<!-- 콘텐츠 -->
 		<article id="content">
 			<div id="mainbody">
-				<form id="inputForm" action="${pageContext.servletContext.contextPath}/insert.do" method="post">
+				<form id="inputForm" action="" method="post">
 				<c:if test="{board.bno eq null}">
-					<input type="hidden" id=bno name=bno value="{board.bno}">
+					<input type="hidden" id="bno" name="bno" value="{board.bno}">
 				</c:if>
 					<div class="category">
 						<label for="menuCateNo" >카테고리 *</label>
@@ -66,7 +66,7 @@
 					</div>
 					<div class="submit">
 <!-- 						<input type="submit" value="저장"> -->
-						<button value="저장" onclick="goSubmit()"></button>
+						<button value="저장" onclick="goSubmit();"></button>
 					</div>
 				</form>
 			</div>
@@ -355,13 +355,12 @@
 	
 	//전송하기
 	function goSubmit(){
-		var bno =('#bno').val();
-		
+	
 		//새글 등록
-		if(bno != null){
-			('#inputForm').action = '/insert.do' 
+		if(('#bno').val() != null){
+			('#inputForm').action = '${pageContext.servletContext.contextPath}/insert.do' 
 		}else{//글 수정
-			('#inputForm').action = '/modify.do' 		
+			('#inputForm').action = '${pageContext.servletContext.contextPath}/modify.do' 		
 		}
 	}
 	
