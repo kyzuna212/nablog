@@ -90,16 +90,13 @@
 	<insert id="insert">
 		INSERT INTO BOARD VALUES (SEQ_BOARD_BNO.NEXTVAL , #{menuCateNo}, #{bTitle}, #{bCnt}, DEFAULT, #{bTage}, 0 , DEFAULT, Y  )
 	</insert>
-	
+
 	<!-- 게시물 조회수를 1 증가시킵니다 -->
 	<update id="updatebView">
-		
 		<selectKey keyProperty="bnoId" order="BEFORE" resultType="int">
 			SELECT B_VIEW FROM BOARD WHERE B_NO = #{bno}
 		</selectKey>
-		
 		UPDATE BOARD SET B_VIEW = #{bnoId} + 1 WHERE B_NO = #{bno} AND B_USYN = 'Y'
-
 	</update>
 	
 	<!-- 게시글 번호에 해당하는 게시물을 불러옵니다 -->

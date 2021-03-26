@@ -96,7 +96,7 @@ public class BoardController {
 		return "board/detail";
 	}
 	
-	//글쓰기 페이지로 이동
+	//새글 글쓰기 페이지로 이동
 	@RequestMapping("/edit.do")
 	public String moveEditPage(@RequestParam("menuCateNo") int menuCateNo,Model model) {
 		model.addAttribute("menu", menuService.selectOne(menuCateNo));

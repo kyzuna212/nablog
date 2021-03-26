@@ -26,8 +26,8 @@
 		<article id="content">
 			<div id="mainbody">
 				<form id="inputForm" action="" method="post">
-				<c:if test="{board.bno eq null}">
-					<input type="hidden" id="bno" name="bno" value="{board.bno}">
+				<c:if test="${board.bno eq null}">
+					<input type="hidden" id="bno" name="bno" value="${board eq null ? }">
 				</c:if>
 					<div class="category">
 						<label for="menuCateNo" >카테고리 *</label>
@@ -357,7 +357,7 @@
 	function goSubmit(){
 	
 		//새글 등록
-		if(('#bno').val() != null){
+		if($('#bno').val() != null){
 			('#inputForm').action = '${pageContext.servletContext.contextPath}/insert.do' 
 		}else{//글 수정
 			('#inputForm').action = '${pageContext.servletContext.contextPath}/modify.do' 		
