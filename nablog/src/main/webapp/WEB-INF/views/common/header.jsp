@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="main" value="${main}"/>	
 <c:set var="menuMainList" value="${menuMainList}"/>	
@@ -34,7 +35,7 @@
 					<c:forEach var="no" items="${menuMainList}" varStatus="index">
 
 						<li>
-							<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${no.menuCateNo}&pg=1">${no.menuTit}(10)</a>
+							<a href="javascript:void(0);" onclick="goCateList(${no.menuCateNo});">${no.menuTit}(${fn:length(menuMainList)})</a>
 							<img src="resources/images/icons8-plus.png" id="img_${index.index+1}" onclick="showSubHide(${index.index+1});">
 							
 							<ul class="sub_hide" id="sub_hide_${index.index+1}">
@@ -42,7 +43,7 @@
 									
 									<c:if test="${subno.menuCateRef eq no.menuCateNo }">
 										<li class="${subno.menuCateNo}">
-											<a href="${pageContext.servletContext.contextPath}/list.do?menuCateNo=${subno.menuCateNo}&pg=1">${subno.menuTit}(7)</a>
+											<a href="javascript:void(0);" onclick="goCateList(${subno.menuCateNo});">${subno.menuTit}(${fn:length(menuList)})</a>
 										</li>
 									</c:if>
 								
@@ -94,10 +95,7 @@
 
 	<script> 
     // 실행 순서 (java-jstl-html-javascript)
-	
-    //메뉴 상태 저장을 위한 전역변수 배열 생성
-   var statusArr = [];
-    
+   
 		$(document).ready(function() {
 			//input박스 숨기기
 			$("input.input_text").hide();
@@ -106,51 +104,29 @@
 			//왼쪽 사이드바 숨기기
 			$(".left_side_bar").hide();
 			
-			//메인 페이지 일때만 다음 기능이 실행 되도록 한다 (다른 페이지에서는 목록은 계속 보여진 채로)
-		//	var main = '<c:out value="${main}"/>';
-
-		/* 	if (main == 'main') { */
+			//저장된 메뉴 상태로 보여지기
+			if(sessionStorage.length > 0){
 				
-				// menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
-				$(".menu>a").click(function() {
-					 $(this).next("ul").slideToggle(); // slideUp/Down 기능 모두 포함 */
-					
-					 /*  $(this).next("ul").slideToggle();
-					var menu =  $(this).next("ul");
-					 
-					// subhide 가 화면상에 보일때는 위로 부드럽게 접고 아니면 아래로 부드럽게 펼치기
-						if (menu.is(":visible")) {
-
-							menu.slideUp();
-							
-
-						} else {
-							
-							menu.slideDown();
-							
-						} */
-									
-					
-				});
- 		
-				  //메인페이지 아니라면 저장된 메뉴 상태 정보 적용할 것 
-				/* if (main != 'main') {  */
-				/*	 if(statusArr.length>0){
-						for(int i=0 ; i<statusArr.length ; i++){
-						//	var subhidestatus = $('#sub_hide_' + statusArr[i]);
-						//	console.log(statusArr[i]);
-							document.write(statusArr[i]+"<br>");
-						}
-					} 
-					
-					
-			/* 	}  */
-		
+				for(var i =0; i<sessionStorage.length; i++){
+					$('#sub_hide_' + sessionStorage.key(i) ).show();
+					$('#img_'+ sessionStorage.key(i) ).attr("src", "resources/images/icons8-minus.png");
+				}
+				openMenu();
+				
+			}
 			
-		
-		/* 	} */
+			// menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+			$(".menu>a").click(function() {
+				$(this).next("ul").slideToggle(); // slideUp/Down 기능 모두 포함 */
+					
+			});
 		  
 		});
+		
+		//왼쪽 카테고리 오픈 
+		function openMenu(){
+			 $(".menu>a").next("ul").show();
+		}
 		
 		//돋보기 사진 클릭시, 검색 박스 보이기
 		function showText() {
@@ -173,54 +149,32 @@
 
 				subhide.slideUp(); // subhide 가 화면상에 보일때는 위로 부드럽게 접고 아니면 아래로 부드럽게 펼치기
 				$('#img_'+seq).attr("src", "resources/images/icons8-plus.png");
-			//	status =status.replace(seq,""); //해당 seq가 포함되어 있다면 제거
-			//	statusArr.splice(seq-1,1);
-			//	statusArr[seq-1] = 0 ;
-				statusArr = statusArr.filter((element) = element !== seq);
-				console.log("쿠키 status에 저장된 값: "+statusArr);
 
+				//세션 스토리지에 메뉴 상태 저장
+				if(sessionStorage.getItem(seq)!=null){
+					sessionStorage.removeItem(seq);
+				}
+				
 			} else {
 
 				subhide.slideDown();
 				$('#img_'+seq).attr("src", "resources/images/icons8-minus.png");
-				statusArr.push(seq);
-				//	statusArr.splice(seq,0,seq);
-				//	statusArr[seq] = seq ;
-			//	status += seq;
-				console.log("쿠키 status에 저장된 값: "+statusArr);
+				
+				//세션 스토리지에 메뉴 상태 저장
+				if(sessionStorage.getItem(seq)==null){
+					sessionStorage.setItem(seq,seq);
+				}
 			
 			}
 			
 
 		}
-		
-		//메뉴상태 저장을 위한 쿠키 생성
-		var setCookie = function(name, value, exp) {
-			var date = new Date();
-			date.setTime(date.getTime() + exp*24*60*60*1000);
-			document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
-			};
-
-		
-		setCookie("status", status, 1); // setCookie(변수이름, 변수값, 기간);
-		
-		var getCookie = function(name) {
-			var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-			return value? value[2] : null;
-			};
-
-		
-		var status = getCookie("status"); // getCookie(변수이름)
-		console.log("쿠키 status에 저장된 값: "+status);
-
-		
-		//해당 목록 페이지로 이동
-		function goList(){
 			
-		}
+		 //카테고리의 첫번째 목록페이지로 이동
+	     function goCateList(CateNo){     	
+	     	location.href="${pageContext.servletContext.contextPath}/list.do?menuCateNo="+CateNo+"&pg=1"; 
+	     }
 
-
-		
 
 	</script>
 </header>

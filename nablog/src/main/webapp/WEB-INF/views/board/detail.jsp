@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -157,37 +158,6 @@
 						</div>
 					</div>
 					
-					<div class="pagination_detail">
-						<a href="#" class="prev ">이전</a>
-						
-							<a href="#"><span>1</span></a>
-						
-							<a><span>···</span></a>
-						
-							<a href="#"><span>96</span></a>
-						
-							<a href="#"><span>97</span></a>
-						
-							<a href="#"><span>98</span></a>
-						
-							<a href="#"><span>99</span></a>
-						
-							<a><span class="selected">100</span></a>
-						
-							<a href="#"><span>101</span></a>
-						
-							<a href="#"><span>102</span></a>
-						
-							<a href="#"><span>103</span></a>
-						
-							<a href="#"><span>104</span></a>
-						
-							<a><span>···</span></a>
-						
-							<a href="#"><span>252</span></a>
-						
-						<a href="#" class="next ">다음</a>
-					</div>
 				</div>
 			</article>
 		</div>
@@ -196,9 +166,7 @@
 	<script> 
    
 	   $(document).ready(function(){
-	    	//main페이지를 제외한 나머지 페이지에서는 목록을 항상 보이게 한다
-	    /* 	$(".sub_hide").show();
-	    	$(".hide").show(); */
+
 	    	$(".left_side_bar").show();
 
 	    }); 
