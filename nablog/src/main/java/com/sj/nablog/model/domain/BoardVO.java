@@ -19,7 +19,7 @@ public class BoardVO {
 //	private String bOrfile;	//첨부파일 원본이름
 //	private String bRefile;	//첨부파일 저장이름
 	private Date bDate;	//게시글 작성일자
-	private String bTage;	//게시글 태크
+//	private String bTage;	//게시글 태크
 	private int bView;	//게시글 조회수
 	private String rgbdId;	//게시글 작성자
 	private String bUsyn;	//게시글 사용여부 (Y:사용, N:삭제)
@@ -27,6 +27,8 @@ public class BoardVO {
 	//첨부파일 등록
 	private List<AttachFile> attachList ;
 	
+	//태그 목록
+	private List<String> bTageList;
 	/*검색*/
 	private String search; //검색
 
@@ -72,14 +74,6 @@ public class BoardVO {
 		this.bDate = bDate;
 	}
 
-	public String getbTage() {
-		return bTage;
-	}
-
-	public void setbTage(String bTage) {
-		this.bTage = bTage;
-	}
-
 	public int getbView() {
 		return bView;
 	}
@@ -120,12 +114,22 @@ public class BoardVO {
 		this.search = search;
 	}
 
+	public List<String> getbTageList() {
+		return bTageList;
+	}
+
+	public void setbTageList(List<String> bTageList) {
+		this.bTageList = bTageList;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", menuCateNo=" + menuCateNo + ", bTitle=" + bTitle + ", bCnt=" + bCnt
-				+ ", bDate=" + bDate + ", bTage=" + bTage + ", bView=" + bView + ", rgbdId=" + rgbdId + ", bUsyn="
-				+ bUsyn + ", attachList=" + attachList + ", search=" + search + "]";
+				+ ", bDate=" + bDate + ", bView=" + bView + ", rgbdId=" + rgbdId + ", bUsyn=" + bUsyn + ", attachList="
+				+ attachList + ", bTageList=" + bTageList + ", search=" + search + "]";
 	}
+
+	
 	
 	
 	

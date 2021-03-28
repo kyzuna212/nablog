@@ -26,9 +26,7 @@
 		<article id="content">
 			<div id="mainbody">
 				<form id="inputForm" action="" method="post">
-				<c:if test="${board.bno eq null}">
-					<input type="hidden" id="bno" name="bno" value="${board eq null ? }">
-				</c:if>
+
 					<div class="category">
 						<label for="menuCateNo" >카테고리 *</label>
 						<select name="menuCateNo" id="menuCateNo">
@@ -37,33 +35,39 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="title">
-						<label for="bTitle" >제목 *</label>
-						<input type="text" id="bTitle" name="bTitle" class="btitle" placeholder="제목을 입력해주세요" required>
-					</div>
-	
-					<textarea name="bCnt" id="editor" rows="10" cols="100" ></textarea>
-					<div class="form-group uploadDiv">
-						<label for="editor" >첨부파일</label>
-						<input type="file" id="bOrfile" name="uploadFile" multiple> <!-- input type='file'은 readonly -->
-<!-- 						<button id="uploadBtn">Upload</button> -->
-					</div>
-					<!-- ul태그 내에 업로드된 파일의 이름을 보여주기 -->
-					<div class="uploadResult">
-						<ul>
-						
-						</ul>
-					</div>
 					
-					<div class="tags">
-						<label for="editor" >태그</label>
-						<input type="text" id="bTage" name="bTage">
-					</div>
-					<!-- 썸네일 클릭시 보여지는 원본이미지  -->
-					<div class="bigPictureWrapper">
-						<div class="bigPicture">
+					<c:if test="${board ne null}">
+						<input type="hidden" id="bno" name="bno" value="${board.bno}">
+						
+						<div class="title">
+							<label for="bTitle" >제목 *</label>
+							<input type="text" id="bTitle" name="bTitle" class="btitle" placeholder="제목을 입력해주세요" value="${board.bTitle}" required>
 						</div>
-					</div>
+		
+						<textarea name="bCnt" id="editor" rows="10" cols="100">${board.bCnt}</textarea>
+						
+						<div class="form-group uploadDiv">
+							<label for="editor" >첨부파일</label>
+							<input type="file" id="uploadFile" name="uploadFile" multiple> 
+	<!-- 						<button id="uploadBtn">Upload</button> -->
+						</div>
+						<!-- ul태그 내에 업로드된 파일의 이름을 보여주기 -->
+						<div class="uploadResult">
+							<ul>
+							
+							</ul>
+						</div>
+						
+						<div class="tags">
+							<label for="editor" >태그</label>
+							<input type="text" id="bTage" name="bTage" value="">
+						</div>
+						<!-- 썸네일 클릭시 보여지는 원본이미지  -->
+						<div class="bigPictureWrapper">
+							<div class="bigPicture">
+							</div>
+						</div>
+					</c:if>
 					<div class="submit">
 <!-- 						<input type="submit" value="저장"> -->
 						<button value="저장" onclick="goSubmit();"></button>
@@ -199,8 +203,7 @@
 	
 
 	$(document).ready(function() {
-		//main페이지를 제외한 나머지 페이지에서는 목록을 항상 보이게 한다
-		$(".sub_hide").show();
+
 		$(".hide").show();
 		$(".left_side_bar").show();
 		
@@ -324,7 +327,14 @@
 		//submit button을 클릭시
 		var formObj = $("form[role='form']");
 		
-		$.("button[type='submit']").on("click", function(e)){
+		$("button[type='submit']").on("click", function(e)){
+			
+			//새글 등록
+			if($('#bno').val() == null){
+				('#inputForm').action = '${pageContext.servletContext.contextPath}/insert.do' 
+			}else{//글 수정
+				('#inputForm').action = '${pageContext.servletContext.contextPath}/modify.do' 		
+			}
 			
 			e.preventDefault();
 			
@@ -340,34 +350,21 @@
 				console.dir(jobj);
 				
 				str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
-				str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+job.data("uuid")+"'>";
-				str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+job.data("path")+"'>";
-				str += "<input type='hidden' name='attachList["+i+"].imageType' value='"+job.data("type")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].imageType' value='"+jobj.data("type")+"'>";
 			});
 			
 			formObj.append(str).submit();
-			
+
+
 		}
 		
-
 		
 	});
 	
-	//전송하기
-	function goSubmit(){
-	
-		//새글 등록
-		if($('#bno').val() != null){
-			('#inputForm').action = '${pageContext.servletContext.contextPath}/insert.do' 
-		}else{//글 수정
-			('#inputForm').action = '${pageContext.servletContext.contextPath}/modify.do' 		
-		}
-	}
-	
-	
-	
 
-	
+
 
 </script>
 
