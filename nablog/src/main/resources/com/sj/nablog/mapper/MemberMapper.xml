@@ -1,1 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sj.nablog.mapper.MemberMapper">
+
+	<resultMap id="resultList" type="com.sj.nablog.model.domain.MemberVO">
+		<id column="ID" property="id" />
+		<result column="PWD" property="pwd" />
+		<result column="NICK_NM" property="nickNm" />
+		<result column="MAG_YN" property="magYn" />
+	</resultMap>
+
+	<!-- 로그인 확인 -->
+	<select id="selectLoginCheck">
+		SELECT * FROM WHERE ID=#{id} AND PWD = #{pwd}
+	</select>
+
+</mapper>

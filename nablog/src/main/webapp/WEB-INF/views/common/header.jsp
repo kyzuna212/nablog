@@ -60,7 +60,7 @@
 				
 				
 				<div class="left_side_bar">
-				<c:import url="/WEB-INF/views/common/leftSideBar.jsp" />
+					<c:import url="/WEB-INF/views/common/leftSideBar.jsp" />
 				</div>
 			
 				
@@ -70,7 +70,7 @@
 				<a href="${pageContext.servletContext.contextPath}/about.do"
 					class="about">about me</a>
 
-			<%-- 	<a href="${ pageContext.servletContext.contextPath}/mlogin.do" class="contact">admin</a>  --%>
+				<a href="${pageContext.servletContext.contextPath}/mlogin.do" class="contact">admin</a>  
 			</div>
 				
 				<div class="search">

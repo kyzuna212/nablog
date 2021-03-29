@@ -1,17 +1,10 @@
 package com.sj.nablog.model.service;
 
+import com.sj.nablog.model.domain.MemberVO;
 
+public interface MemberService {
 
-public class MemberService {
-
-	/*
-	 * @Autowired MemberMapper memberMapper;
-	 * 
-	 * //로그인 확인 public MemberVO loginCheck(MemberVO membervo) {
-	 * 
-	 * MemberVO member = memberMapper.selectOne(membervo);
-	 * 
-	 * return member; }
-	 */
+	/*로그인 확인*/
+	MemberVO loginCheck(MemberVO membervo);
 
 }
