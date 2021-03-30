@@ -35,16 +35,13 @@ public class MemberController {
 		MemberVO loginMember = memberService.loginCheck(membervo);
 		
 		if(loginMember !=null) {
-						
-			if( StringUtils.equals(loginMember.getMagYn(),"Y") ){//관리자라면
-				
-				return "admin/main";
 			
-			}else {//관리자가 아니라면
-				HttpSession session = request.getSession();
-				session.setAttribute("Member", loginMember);				
+			HttpSession session = request.getSession();
+			session.setAttribute("Member", loginMember);		
+			
+			if( StringUtils.equals(loginMember.getMagYn(),"Y") ){//관리자라면
+				return "admin/main";		
 			}
-	
 		}	
 		
 		return "redirect:main.do";
