@@ -1,1 +1,14 @@
 @charset "UTF-8";
+@media (max-width: 995px)
+.sidebar {
+    width: 69px;
+}
+.sidebar {
+    float: left;
+    width: 280px;
+    position: relative;
+    background: #f9f9f9;
+    border-right: 1px solid #e5e5e5;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
